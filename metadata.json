@@ -1,0 +1,38 @@
+{
+  "version": "0.4.0",
+  "recipes": {
+  },
+  "groupings": {
+  },
+  "recommendations": {
+  },
+  "long_description": "= DESCRIPTION:\nInstall Sphinx\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n= POSTGRESQL\nTo setup with postgresql support override the sphinx/configure_flags attribute.\n\nHere is an example of how I do it in one of my cookbook attributes file:\n\n\ninclude_attribute \"sphinx::default\"\n\nset[:sphinx][:configure_flags] = [\n  \"--with-pgsql\",\n  \"--without-mysql\",\n  \"#{sphinx[:use_stemmer] ? '--with-stemmer' : '--without-stemmer'}\"\n]\n\n= History\n\n0.4 Updated Download URL for sphinx source\n",
+  "attributes": {
+  },
+  "suggestions": {
+  },
+  "dependencies": {
+    "mysql": [
+
+    ],
+    "build-essential": [
+
+    ],
+    "postgresql": [
+
+    ]
+  },
+  "conflicting": {
+  },
+  "license": "Apache 2.0",
+  "providing": {
+  },
+  "maintainer": "Alex Soto",
+  "name": "sphinx",
+  "replacing": {
+  },
+  "platforms": {
+  },
+  "maintainer_email": "apsoto@gmail.com",
+  "description": "Installs/Configures sphinx search engine."
+}

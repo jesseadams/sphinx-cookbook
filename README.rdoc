@@ -1,0 +1,26 @@
+= DESCRIPTION:
+Install Sphinx
+
+= REQUIREMENTS:
+
+= ATTRIBUTES: 
+
+= USAGE:
+
+= POSTGRESQL
+To setup with postgresql support override the sphinx/configure_flags attribute.
+
+Here is an example of how I do it in one of my cookbook attributes file:
+
+
+include_attribute "sphinx::default"
+
+set[:sphinx][:configure_flags] = [
+  "--with-pgsql",
+  "--without-mysql",
+  "#{sphinx[:use_stemmer] ? '--with-stemmer' : '--without-stemmer'}"
+]
+
+= History
+
+0.4 Updated Download URL for sphinx source
