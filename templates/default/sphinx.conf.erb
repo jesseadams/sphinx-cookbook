@@ -1,0 +1,21 @@
+#! /bin/bash
+# CREATED BY CHEF - local changes will be crushed
+#
+# Put files to be included in <%= @install_path %>/conf.d
+#
+# Includes named .sh will be included via .
+# Includes named .txt will be included via cat
+# All other includes will be executed
+
+shopt -s nullglob
+
+for include in <%= @install_path %>/conf.d/*
+do
+    if [ ${include##*.} == "sh" ] ; then
+        . <%= @install_path %>/conf.d/$include
+    elif [ ${include##*.} == "txt" ] ; then
+        cat <%= @install_path %>/conf.d/$include
+    else
+        <%= @install_path %>/conf.d/$include
+    fi
+done
