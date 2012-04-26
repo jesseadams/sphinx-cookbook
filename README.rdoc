@@ -3,6 +3,10 @@ Install Sphinx
 
 = REQUIREMENTS:
 
+* If you want to use with MySQL, depends on the "mysql" cookbook.
+* If you want to use with Postgres, depends on the "postgresql" cookbook.
+
+
 = ATTRIBUTES: 
 
 = USAGE:
@@ -23,4 +27,5 @@ set[:sphinx][:configure_flags] = [
 
 = History
 
+0.5 Added package install option
 0.4 Updated Download URL for sphinx source

@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: sphinx
-# Recipe:: default
+# Recipe:: package
 #
-# Copyright 2010, Alex Soto <apsoto@gmail.com>
+# Copyright 2012, Riot Games, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "mysql::client" if node[:sphinx][:use_mysql]
-include_recipe "postgresql::client" if node[:sphinx][:use_postgres]
-
-if node[:sphinx][:use_package]
-  include_recipe "sphinx::package"
-else
-  include_recipe "sphinx::source"
+package "sphinx" do
+  version node[:sphinx][:version]
+  action :install
 end
