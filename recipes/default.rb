@@ -26,6 +26,10 @@ else
   include_recipe "sphinx::source"
 end
 
+directory node['sphinx']['install_path'] do
+  recursive true
+end
+
 template "#{node['sphinx']['install_path']}/sphinx.conf" do
   source "sphinx.conf.erb"
   owner node[:sphinx][:user]
