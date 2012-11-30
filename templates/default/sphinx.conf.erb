@@ -11,17 +11,17 @@ shopt -s nullglob
 
 echo << 'EOF'
 searchd {
-<%= @searchd.each do |k, v| %>
+<% @searchd.each do |k, v| %>
     <%= @k %>=<%= @v %>
-<%= end %>
+<% end %>
 }
 EOF
 
 echo << 'EOF'
 indexer {
-<%= @indexer.each do |k, v| %>
+<% @indexer.each do |k, v| %>
     <%= @k %>=<%= @v %>
-<%= end %>
+<% end %>
 }
 EOF
 
