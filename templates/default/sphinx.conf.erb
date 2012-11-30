@@ -9,6 +9,23 @@
 
 shopt -s nullglob
 
+echo << 'EOF'
+searchd {
+<%= @searchd.each do |k, v| %>
+    <%= @k %>=<%= @v %>
+<%= end %>
+}
+EOF
+
+echo << 'EOF'
+indexer {
+<%= @indexer.each do |k, v| %>
+    <%= @k %>=<%= @v %>
+<%= end %>
+}
+EOF
+
+
 for include in <%= @install_path %>/conf.d/*
 do
     if [ ${include##*.} == "sh" ] ; then
