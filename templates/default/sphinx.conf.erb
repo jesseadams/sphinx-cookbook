@@ -9,30 +9,30 @@
 
 shopt -s nullglob
 
-echo << 'EOF'
+cat <<EOT
 searchd {
 <% @searchd.each do |k, v| %>
-    <%= @k %>=<%= @v %>
+    <%= k %>=<%= v %>
 <% end %>
 }
-EOF
+EOT
 
-echo << 'EOF'
+cat <<EOT
 indexer {
 <% @indexer.each do |k, v| %>
-    <%= @k %>=<%= @v %>
+    <%= k %>=<%= v %>
 <% end %>
 }
-EOF
+EOT
 
 
 for include in <%= @install_path %>/conf.d/*
 do
     if [ ${include##*.} == "sh" ] ; then
-        . <%= @install_path %>/conf.d/$include
+        . $include
     elif [ ${include##*.} == "txt" ] ; then
-        cat <%= @install_path %>/conf.d/$include
+        cat $include
     else
-        <%= @install_path %>/conf.d/$include
+        $include
     fi
 done
