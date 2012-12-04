@@ -1,0 +1,7 @@
+index <%= @new_resource.name %> {
+    source = <%= @new_resource.source %>
+    path  = <%= @data_path %>
+<% @new_resource.params.each do |k, v| %>
+    <%= k %> = <%= v %>
+<% end %>
+}

@@ -1,0 +1,6 @@
+source <%= @new_resource.name %> {
+    type = <%= @new_resource.type %>
+<% @new_resource.params.each do |k, v| %>
+    <%= k %> = <%= v %>
+<% end %>
+}
