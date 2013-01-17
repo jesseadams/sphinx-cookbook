@@ -14,6 +14,8 @@ Install Sphinx
 
 = USAGE:
 
+* When using lwrps for the source, if you need to repeat a field (e.g. if your source has 2 sql_attr_uints) then just put the values in a list, like :sql_attr_uint => ["a", "b"].
+
 = History
 
 0.6 Added lwrp for indexes and sources, searchd and indexer configs from attributes.
