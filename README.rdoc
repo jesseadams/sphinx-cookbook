@@ -14,27 +14,19 @@ Install Sphinx
 
 * If you want to use with MySQL, depends on the "mysql" cookbook.
 * If you want to use with Postgres, depends on the "postgresql" cookbook.
-
+* If compiling from source, packages are automatically included according to set[:sphinx][:use_mysql] or set[:sphinx][:use_postgres].
 
 = ATTRIBUTES: 
 
+* See above section.
+* Check attributes/default.rb
+
 = USAGE:
 
-= POSTGRESQL
-To setup with postgresql support override the sphinx/configure_flags attribute.
-
-Here is an example of how I do it in one of my cookbook attributes file:
-
-
-include_attribute "sphinx::default"
-
-set[:sphinx][:configure_flags] = [
-  "--with-pgsql",
-  "--without-mysql",
-  "#{sphinx[:use_stemmer] ? '--with-stemmer' : '--without-stemmer'}"
-]
+* When using lwrps for the source, if you need to repeat a field (e.g. if your source has 2 sql_attr_uints) then just put the values in a list, like :sql_attr_uint => ["a", "b"].
 
 = History
 
+0.6 Added lwrp for indexes and sources, searchd and indexer configs from attributes.
 0.5 Added package install option
 0.4 Updated Download URL for sphinx source
