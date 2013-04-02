@@ -18,6 +18,6 @@
 #
 
 package "sphinx" do
-  version node[:sphinx][:version]
+  version node[:sphinx][:version] unless node[:sphinx][:version].nil?
   action :install
 end
