@@ -1,12 +1,3 @@
-<b>NOTE: Riot Games is not the maintainer of this cookbook</b>, but we're hosting the repo until a new maintainer is found. Feel
-free to leave issues/PRs and we'll assist in triage, etc. Contact @ivey for Riot-specific questions, or @apsoto and @jesseadams
-for cookbook questions.
-
-When a new maintainer takes over, we'll transfer the repo so issue history is preserved, and leave a pointer.
-
----
-
-
 = DESCRIPTION:
 Install Sphinx
 
