@@ -40,10 +40,17 @@ default_attributes({
 
 #### History ####
 
+0.6.0
+
+* Made package version force attribute optional
+* Added several required fields to metadata
+* Rebuilt metadata.json
+* Added recipe lines to metadata for OpsWorks (thanks @ryansch)
+
 0.5.0
 
-* Added package install option
+* Added package install option (thanks @RiotGames)
 
 0.4.0
 
-* Updated Download URL for sphinx source
+* Updated Download URL for sphinx source (thanks @RiotGames)
