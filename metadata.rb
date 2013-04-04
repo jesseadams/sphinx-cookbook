@@ -3,7 +3,6 @@ maintainer       "Jesse R. Adams"
 maintainer_email "jesse@techno-geeks.org"
 license          "Apache 2.0"
 description      "Installs/Configures sphinx search engine."
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.6.0"
 
 recipe           "sphinx", "Installs sphinx"
