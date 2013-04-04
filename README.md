@@ -1,18 +1,18 @@
-#### Description ####
+## Description
 
 Installs and configures Sphinx search (searchd). Installation can by from source or package.
 
-#### Requirements #####
+## Requirements
 
 This cookbook depends on the mysql and postgresql cookbooks.
 
-#### Attributes ####
+## Attributes
 
 See attributes/default.rb for a full list.
 
-#### Usage ####
+## Usage
 
-##### MySQL #####
+### MySQL
 
 Here is an example role using MySQL with a package install
 
@@ -38,19 +38,19 @@ default_attributes({
 #override_attributes()
 ```
 
-#### History ####
+## History
 
 0.6.0
 
 * Made package version force attribute optional
 * Added several required fields to metadata
 * Rebuilt metadata.json
-* Added recipe lines to metadata for OpsWorks (thanks @ryansch)
+* Added recipe lines to metadata for OpsWorks (thanks [@ryansch](https://github.com/ryansch))
 
 0.5.0
 
-* Added package install option (thanks @RiotGames)
+* Added package install option (thanks [@RiotGames](https://github.com/RiotGames))
 
 0.4.0
 
-* Updated Download URL for sphinx source (thanks @RiotGames)
+* Updated Download URL for sphinx source (thanks [@RiotGames](https://github.com/RiotGames))
