@@ -1,38 +1,39 @@
 {
-  "version": "0.4.0",
-  "recipes": {
+  "name": "sphinx",
+  "description": "Installs/Configures sphinx search engine.",
+  "long_description": "= DESCRIPTION:\nInstall Sphinx\n\n= REQUIREMENTS:\n\n* If you want to use with MySQL, depends on the \"mysql\" cookbook.\n* If you want to use with Postgres, depends on the \"postgresql\" cookbook.\n\n\n= ATTRIBUTES: \n\n= USAGE:\n\n= POSTGRESQL\nTo setup with postgresql support override the sphinx/configure_flags attribute.\n\nHere is an example of how I do it in one of my cookbook attributes file:\n\n\ninclude_attribute \"sphinx::default\"\n\nset[:sphinx][:configure_flags] = [\n  \"--with-pgsql\",\n  \"--without-mysql\",\n  \"#{sphinx[:use_stemmer] ? '--with-stemmer' : '--without-stemmer'}\"\n]\n\n= History\n\n0.5 Added package install option\n0.4 Updated Download URL for sphinx source\n",
+  "maintainer": "Alex Soto",
+  "maintainer_email": "apsoto@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "centos": ">= 0.0.0",
+    "rhel": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0"
   },
-  "groupings": {
+  "dependencies": {
+    "build-essential": ">= 0.0.0",
+    "mysql": ">= 0.0.0",
+    "postgresql": ">= 0.0.0"
   },
   "recommendations": {
   },
-  "long_description": "= DESCRIPTION:\nInstall Sphinx\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n= POSTGRESQL\nTo setup with postgresql support override the sphinx/configure_flags attribute.\n\nHere is an example of how I do it in one of my cookbook attributes file:\n\n\ninclude_attribute \"sphinx::default\"\n\nset[:sphinx][:configure_flags] = [\n  \"--with-pgsql\",\n  \"--without-mysql\",\n  \"#{sphinx[:use_stemmer] ? '--with-stemmer' : '--without-stemmer'}\"\n]\n\n= History\n\n0.4 Updated Download URL for sphinx source\n",
-  "attributes": {
-  },
   "suggestions": {
-  },
-  "dependencies": {
-    "mysql": [
-
-    ],
-    "build-essential": [
-
-    ],
-    "postgresql": [
-
-    ]
   },
   "conflicting": {
   },
-  "license": "Apache 2.0",
   "providing": {
+    "sphinx::default": ">= 0.0.0",
+    "sphinx::package": ">= 0.0.0",
+    "sphinx::source": ">= 0.0.0"
   },
-  "maintainer": "Alex Soto",
-  "name": "sphinx",
   "replacing": {
   },
-  "platforms": {
+  "attributes": {
   },
-  "maintainer_email": "apsoto@gmail.com",
-  "description": "Installs/Configures sphinx search engine."
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.5.0"
 }

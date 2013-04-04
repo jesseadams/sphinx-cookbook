@@ -1,6 +1,6 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
-default[:sphinx][:version]      = '2.0.4'
+default[:sphinx][:version]      = nil
 default[:sphinx][:url]          = "http://sphinxsearch.com/files/sphinx-#{sphinx[:version]}-release.tar.gz"
 default[:sphinx][:stemmer_url]  = "http://snowball.tartarus.org/dist/libstemmer_c.tgz"
 default[:sphinx][:user]         = 'root'
