@@ -17,4 +17,14 @@ default[:sphinx][:configure_flags] = [
   "#{sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'}"
 ]
 
+default[:sphinx][:searchd][:listen] = ["0.0.0.0:9312"]
+default[:sphinx][:searchd][:log] = "/var/log/sphinx/sphinx.log"
+default[:sphinx][:searchd][:query_log] = "/var/log/sphinx/query.log"
+default[:sphinx][:searchd][:pid_file] = "/tmp/sphinx.pid"
+default[:sphinx][:searchd][:read_timeout] = 5
+default[:sphinx][:searchd][:max_children] = 30
+default[:sphinx][:searchd][:max_matches] = 1000
 
+default[:sphinx][:indexer][:mem_limit] = "32M"
+default[:sphinx][:indexer][:write_buffer] = "1M"
+default[:sphinx][:indexer][:max_file_field_buffer] = "8M"

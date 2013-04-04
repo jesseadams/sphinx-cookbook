@@ -46,6 +46,7 @@ default_attributes({
 * Added several required fields to metadata
 * Rebuilt metadata.json
 * Added recipe lines to metadata for OpsWorks (thanks [@ryansch](https://github.com/ryansch))
+* Added lwrp for indexes and sources, searchd and indexer configs from attributes (thanks [@makmanalp](https://github.com/makmanalp))
 
 0.5.0
 
