@@ -17,7 +17,17 @@
 # limitations under the License.
 #
 
+case node['platform_family']
+when 'debian'
+  sphinx_package_name = 'sphinxsearch'
+else
+  sphinx_package_name= 'sphinx'
+end
+
+sphinx_package_name = node[:sphinx][:package_name] || sphinx_package_name
+
 package "sphinx" do
   version node[:sphinx][:version] unless node[:sphinx][:version].nil?
   action :install
+  package_name sphinx_package_name
 end
