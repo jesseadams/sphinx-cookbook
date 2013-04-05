@@ -19,28 +19,29 @@
 
 include_recipe "build-essential"
 
-sphinx_path = "/tmp/sphinx-#{node[:sphinx][:version]}-release"
+cache_path  = Chef::Config[:file_cache_path]
+sphinx_path = File.join(cache_path, "sphinx-#{node[:sphinx][:version]}-release")
 sphinx_tar = "#{sphinx_path}.tar.gz"
 
 remote_file sphinx_tar do
   source "#{node[:sphinx][:url]}"
-  not_if { ::File.exists?(sphinx_tar) }
+  action :create_if_missing
 end
 
 execute "Extract Sphinx source" do
-  cwd "/tmp"
+  cwd cache_path
   command "tar -zxvf #{sphinx_tar}"
   not_if { ::File.exists?(sphinx_path) }
 end
 
 if node[:sphinx][:use_stemmer]
-  remote_file "/tmp/libstemmer_c.tgz" do
+  remote_file File.join(cache_path, "libstemmer_c.tgz") do
     source node[:sphinx][:stemmer_url]
-    not_if { ::File.exists?("/tmp/libstemmer_c.tgz") }
+    action :create_if_missing
   end
 
   execute "Extract libstemmer source" do
-    cwd "/tmp"
+    cwd cache_path
     command "tar -C #{sphinx_path} -zxf libstemmer_c.tgz"
     not_if { ::File.exists?("#{sphinx_path}/libstemmer_c/src_c") }
   end
