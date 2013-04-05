@@ -16,6 +16,7 @@ provides         "sphinx::source"
 depends          "build-essential"
 depends          "mysql"
 depends          "postgresql"
+depends          "yum"
 
 supports         "centos"
 supports         "rhel"

@@ -20,6 +20,9 @@
 case node['platform_family']
 when 'debian'
   sphinx_package_name = 'sphinxsearch'
+when 'rhel'
+  sphinx_package_name = 'sphinx'
+  include_recipe node[:sphinx][:yum_repo] unless node[:sphinx][:yum_repo].empty?
 else
   sphinx_package_name= 'sphinx'
 end

@@ -7,6 +7,10 @@ default[:sphinx][:stemmer_url]  = "http://snowball.tartarus.org/dist/libstemmer_
 default[:sphinx][:user]         = 'root'
 default[:sphinx][:group]        = 'root'
 
+# when installing package in RHEL/CentOS include yum::epel by default
+# set to 'nil' to not include recipes before installing sphinx package
+default[:sphinx][:yum_repo]     = 'yum::epel'
+
 # tunable options
 default[:sphinx][:use_stemmer]  = false
 default[:sphinx][:use_mysql]    = false
