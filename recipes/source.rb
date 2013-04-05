@@ -56,7 +56,7 @@ bash "Build and Install Sphinx Search" do
     make &&
     make install
   EOH
-  not_if { ::File.exists?("/usr/local/bin/searchd") }
+  not_if { ::File.exists?( ::File.join(node[:sphinx][:install_path],'bin','searchd') ) }
   # add additional test to verify of searchd is same as version of sphinx we are installing
   #  && system("#{node[:sphinx][:install_path]}/bin/ree-version | grep -q '#{node[:sphinx][:version]}$'")
 end
