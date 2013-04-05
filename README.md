@@ -40,6 +40,10 @@ default_attributes({
 
 ## History
 
+0.6.2
+
+* Fixed configuration flag for libstemmer (thanks [@seanculver](https://github.com/seanculver))
+
 0.6.1
 
 * Use install_path attribute as the --prefix for source installation
