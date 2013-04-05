@@ -24,7 +24,7 @@ sphinx_path = File.join(cache_path, "sphinx-#{node[:sphinx][:version]}-release")
 sphinx_tar = "#{sphinx_path}.tar.gz"
 
 remote_file sphinx_tar do
-  source "#{node[:sphinx][:url]}"
+  source node[:sphinx][:url]
   action :create_if_missing
 end
 
