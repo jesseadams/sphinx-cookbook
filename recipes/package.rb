@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-case node['platform_family']
+case node[:platform_family]
 when 'debian'
   sphinx_package_name = 'sphinxsearch'
 when 'rhel'

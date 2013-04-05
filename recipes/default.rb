@@ -26,21 +26,21 @@ else
   include_recipe "sphinx::source"
 end
 
-directory node['sphinx']['install_path'] do
+directory node[:sphinx][:install_path] do
   recursive true
 end
 
-template "#{node['sphinx']['install_path']}/sphinx.conf" do
+template "#{node[:sphinx][:install_path]}/sphinx.conf" do
   source "sphinx.conf.erb"
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0644'
-  variables :install_path => node['sphinx']['install_path'],
-            :searchd => node['sphinx']['searchd'],
-            :indexer => node['sphinx']['indexer']
+  variables :install_path => node[:sphinx][:install_path],
+            :searchd => node[:sphinx][:searchd],
+            :indexer => node[:sphinx][:indexer]
 end
 
-directory "#{node['sphinx']['install_path']}/conf.d" do
+directory "#{node[:sphinx][:install_path]}/conf.d" do
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0755'

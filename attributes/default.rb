@@ -18,9 +18,9 @@ default[:sphinx][:use_postgres] = false
 
 default[:sphinx][:configure_flags] = [
   "--prefix=#{sphinx[:install_path]}",
-  "#{sphinx[:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer'}",
-  "#{sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql'}",
-  "#{sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'}"
+  sphinx[:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
+  sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql',
+  sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
 ]
 
 default[:sphinx][:searchd][:listen] = ["0.0.0.0:9312"]
