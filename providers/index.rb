@@ -13,6 +13,7 @@ action :create do
             :data_path => data_path
     end
 
+    new_resource.updated_by_last_action(true)
 end
 
 
@@ -22,6 +23,8 @@ action :reindex do
         config = "--config #{node[:sphinx][:install_path]}/sphinx.conf"
         command "indexer #{config} #{rotate} #{new_resource.name}"
     end
+
+    new_resource.updated_by_last_action(true)
 end
 
 action :delete do
@@ -31,4 +34,6 @@ action :delete do
     execute "Deleting #{new_resource.name}" do
         command "rm #{conf_path}"
     end
+
+    new_resource.updated_by_last_action(true)
 end

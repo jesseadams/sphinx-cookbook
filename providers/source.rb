@@ -11,6 +11,8 @@ action :create do
         variables :new_resource => new_resource
     end
 
+    new_resource.updated_by_last_action(true)
+
 end
 
 action :delete do
@@ -20,4 +22,7 @@ action :delete do
     execute "Deleting #{new_resource.name}" do
         command "rm #{conf_path}"
     end
+
+    new_resource.updated_by_last_action(true)
+
 end
