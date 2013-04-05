@@ -14,7 +14,8 @@
   "dependencies": {
     "build-essential": ">= 0.0.0",
     "mysql": ">= 0.0.0",
-    "postgresql": ">= 0.0.0"
+    "postgresql": ">= 0.0.0",
+    "yum": ">= 0.0.0"
   },
   "recommendations": {
   },
@@ -38,5 +39,5 @@
     "sphinx::package": "Installs sphinx from a package",
     "sphinx::source": "Installs sphinx from source"
   },
-  "version": "0.6.0"
+  "version": "0.6.1"
 }

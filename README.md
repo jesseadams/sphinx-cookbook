@@ -40,6 +40,12 @@ default_attributes({
 
 ## History
 
+0.6.1
+
+* Use install_path attribute as the --prefix for source installation
+* Download files to the proper file_cache_path instead of /tmp
+* Dynamically determine package_name based on platform, with manual override
+
 0.6.0
 
 * Made package version force attribute optional
@@ -55,3 +61,8 @@ default_attributes({
 0.4.0
 
 * Updated Download URL for sphinx source (thanks [@RiotGames](https://github.com/RiotGames))
+
+## Maintainers
+
+* [@jesseadams](https://github.com/jesseadams)
+* [@kesor](https://github.com/kesor)
