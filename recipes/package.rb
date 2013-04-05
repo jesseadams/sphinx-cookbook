@@ -17,7 +17,20 @@
 # limitations under the License.
 #
 
+case node['platform_family']
+when 'debian'
+  sphinx_package_name = 'sphinxsearch'
+when 'rhel'
+  sphinx_package_name = 'sphinx'
+  include_recipe node[:sphinx][:yum_repo] unless node[:sphinx][:yum_repo].empty?
+else
+  sphinx_package_name= 'sphinx'
+end
+
+sphinx_package_name = node[:sphinx][:package_name] || sphinx_package_name
+
 package "sphinx" do
   version node[:sphinx][:version] unless node[:sphinx][:version].nil?
   action :install
+  package_name sphinx_package_name
 end
