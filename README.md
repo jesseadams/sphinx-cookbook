@@ -42,6 +42,7 @@ default_attributes({
 
 0.6.2
 
+* Resolved several items identified by foodcritic
 * Fixed configuration flag for libstemmer (thanks [@seanculver](https://github.com/seanculver))
 
 0.6.1
