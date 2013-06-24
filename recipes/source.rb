@@ -61,3 +61,11 @@ bash "Build and Install Sphinx Search" do
   #  && system("#{node[:sphinx][:install_path]}/bin/ree-version | grep -q '#{node[:sphinx][:version]}$'")
 end
 
+#bash "Build and Install Lib C Sphinx" do
+#    cwd "#{sphinx_path}/api/libsphinxclient"
+#    code <<-EOH
+#        ./configure
+#        make
+#        make install
+#    EOH
+#end

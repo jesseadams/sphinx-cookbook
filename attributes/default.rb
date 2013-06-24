@@ -1,6 +1,7 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
-default[:sphinx][:version]      = nil
+defualt[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/lib"
+default[:sphinx][:version]      = "2.0.8"
 default[:sphinx][:package_name] = nil # depends on platform_family when not explicit
 default[:sphinx][:url]          = "http://sphinxsearch.com/files/sphinx-#{sphinx[:version]}-release.tar.gz"
 default[:sphinx][:stemmer_url]  = "http://snowball.tartarus.org/dist/libstemmer_c.tgz"
@@ -21,6 +22,10 @@ default[:sphinx][:configure_flags] = [
   sphinx[:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
   sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql',
   sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
+]
+
+default[:sphinx][:configure_flags] = [
+    "--prefix=#{sphinx[:libsphinxclient][:install_path]}"
 ]
 
 default[:sphinx][:searchd][:listen] = ["0.0.0.0:9312"]
