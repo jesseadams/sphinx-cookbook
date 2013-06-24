@@ -1,6 +1,6 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
-default[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/lib"
+default[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/client"
 default[:sphinx][:version]      = "2.0.8"
 default[:sphinx][:package_name] = nil # depends on platform_family when not explicit
 default[:sphinx][:url]          = "http://sphinxsearch.com/files/sphinx-#{sphinx[:version]}-release.tar.gz"
@@ -24,7 +24,7 @@ default[:sphinx][:configure_flags] = [
   sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
 ]
 
-default[:sphinx][:configure_flags] = [
+default[:sphinx][:libsphinxclient][:configure_flags] = [
     "--prefix=#{sphinx[:libsphinxclient][:install_path]}"
 ]
 
