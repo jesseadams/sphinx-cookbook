@@ -1,6 +1,6 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
-defualt[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/lib"
+default[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/lib"
 default[:sphinx][:version]      = "2.0.8"
 default[:sphinx][:package_name] = nil # depends on platform_family when not explicit
 default[:sphinx][:url]          = "http://sphinxsearch.com/files/sphinx-#{sphinx[:version]}-release.tar.gz"
