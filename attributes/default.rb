@@ -1,12 +1,14 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
-default[:sphinx][:libsphinxclient][:install_path] = "/opt/sphinx/client"
 default[:sphinx][:version]      = "2.0.8"
 default[:sphinx][:package_name] = nil # depends on platform_family when not explicit
 default[:sphinx][:url]          = "http://sphinxsearch.com/files/sphinx-#{sphinx[:version]}-release.tar.gz"
 default[:sphinx][:stemmer_url]  = "http://snowball.tartarus.org/dist/libstemmer_c.tgz"
 default[:sphinx][:user]         = 'root'
 default[:sphinx][:group]        = 'root'
+
+default[:sphinx][:php][:version]= "1.3.0"
+default[:sphinx][:php][:url]	= "http://pecl.php.net/get/sphinx-#{sphinx[:php][:version]}.tgz"
 
 # when installing package in RHEL/CentOS include yum::epel by default
 # set to 'nil' to not include recipes before installing sphinx package
@@ -22,10 +24,6 @@ default[:sphinx][:configure_flags] = [
   sphinx[:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
   sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql',
   sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
-]
-
-default[:sphinx][:libsphinxclient][:configure_flags] = [
-    "--prefix=#{sphinx[:libsphinxclient][:install_path]}"
 ]
 
 default[:sphinx][:searchd][:listen] = ["0.0.0.0:9312"]

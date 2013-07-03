@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: sphinx
-# Recipe:: libsphinxclient
+# Recipe:: phpClient
 #
 # Copyright 2013, Gianluca Arbezzano <me@gianarb.it>
 #
@@ -16,16 +16,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 include_recipe "build-essential"
 
 cache_path  = Chef::Config[:file_cache_path]
-sphinx_path = File.join(cache_path, "sphinx-#{node[:sphinx][:version]}-release")
+sphinx_path = File.join(cache_path, "sphinx-#{node[:sphinx][:php][:version]}")
+sphinx_tar = "#{sphinx_path}.tar.gz"
 
-bash "Install Client Sphinx" do
-	cwd "#{sphinx_path}/api/libsphinxclient"
+remote_file sphinx_tar do
+  source node[:sphinx][:php][:url]
+  action :create_if_missing
+end
+
+execute "Extract Php Sphinx Client source" do
+  cwd cache_path
+  command "tar -zxvf #{sphinx_tar}"
+  not_if { ::File.exists?(sphinx_path) }
+end
+
+bash "Compile Php Client" do 
+	cwd "#{sphinx_path}"
 	code <<-EOH
+		phpize
         ./configure &&
 		make &&
 		make install
+		sudo apachectl restart
 	EOH
 end
