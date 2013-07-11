@@ -16,6 +16,7 @@ default[:sphinx][:yum_repo]     = 'yum::epel'
 # tunable options
 default[:sphinx][:use_stemmer]  = false
 default[:sphinx][:use_mysql]    = false
+default[:sphinx][:use_percona]  = false
 default[:sphinx][:use_postgres] = false
 
 default[:sphinx][:configure_flags] = nil
