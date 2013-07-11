@@ -14,12 +14,13 @@ default[:sphinx][:yum_repo]     = 'yum::epel'
 # tunable options
 default[:sphinx][:use_stemmer]  = false
 default[:sphinx][:use_mysql]    = false
+default[:sphinx][:use_percona]  = false
 default[:sphinx][:use_postgres] = false
 
 default[:sphinx][:configure_flags] = [
   "--prefix=#{sphinx[:install_path]}",
   sphinx[:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
-  sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql',
+  (sphinx[:use_mysql] or sphinx[:use_percona]) ? '--with-mysql' : '--without-mysql',
   sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
 ]
 
