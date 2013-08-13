@@ -41,7 +41,7 @@ default_attributes({
 ## History
 0.6.3
 
-* Older and non-release versions of sphinx can now be built from source (thanks [@justinlocsei](https://github.com/justinlocsei)
+* Older and non-release versions of sphinx can now be built from source (thanks [@justinlocsei](https://github.com/justinlocsei))
 
 0.6.2
 
