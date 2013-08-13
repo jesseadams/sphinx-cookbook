@@ -22,6 +22,7 @@ default[:sphinx][:configure_flags] = [
   sphinx[:use_mysql] ? '--with-mysql' : '--without-mysql',
   sphinx[:use_postgres] ? '--with-pgsql' : '--without-pgsql'
 ]
+default[:sphinx][:extra_configure_flags] = []
 
 default[:sphinx][:searchd][:listen] = ["0.0.0.0:9312"]
 default[:sphinx][:searchd][:log] = "/var/log/sphinx/sphinx.log"
