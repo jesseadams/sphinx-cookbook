@@ -83,7 +83,7 @@ bash "Build and Install Sphinx Search" do
   # use trailing && to break on the first thing.
   # Otherwise the whole block depends on the last line
   code <<-EOH
-    ./configure #{configure_flags.join(" ")} &&
+    ./configure #{configure_flags.concat(node[:sphinx][:extra_configure_flags]).uniq.join(" ")} &&
     make &&
     make install
   EOH
