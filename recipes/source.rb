@@ -19,6 +19,17 @@
 
 include_recipe "build-essential"
 
+# Install required dependency when building from source
+# against Percona server
+if node[:sphinx][:use_percona]
+  case node[:platform_family]
+  when 'debian'
+    package 'libssl-dev'
+  when 'rhel'
+    package 'openssl-devel'
+  end
+end
+
 # Set the correct download URL for the requested version of sphinx, accounting
 # for nonstandard URLs, old versions, and beta releases, provided that a default
 # value does not already exist for the URL
@@ -74,7 +85,7 @@ if configure_flags.nil?
     "--prefix=#{node[:sphinx][:install_path]}",
     "--bindir=#{node[:sphinx][:binary_path]}",
     node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
-    node[:sphinx][:use_mysql] or node[:sphinx][:use_percona] ? '--with-mysql' : '--without-mysql',
+    (node[:sphinx][:use_mysql] or node[:sphinx][:use_percona]) ? '--with-mysql' : '--without-mysql',
     node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql'
   ]
 end
