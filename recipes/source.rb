@@ -19,12 +19,31 @@
 
 include_recipe "build-essential"
 
+# Set the correct download URL for the requested version of sphinx, accounting
+# for nonstandard URLs, old versions, and beta releases, provided that a default
+# value does not already exist for the URL
+sphinx_url = node[:sphinx][:url]
+if sphinx_url.nil?
+  if node[:sphinx][:version]
+    if node[:sphinx][:version] == "0.9.9"
+        source_file = "archive/sphinx-0.9.9"
+    elsif node[:sphinx][:version] =~ /-[a-z]/ or node[:sphinx][:version].to_f < 1
+      source_file = "sphinx-#{node[:sphinx][:version]}"
+    else
+      source_file = "sphinx-#{node[:sphinx][:version]}-release"
+    end
+  else
+    source_file = "sphinx-2.0.8-release"
+  end
+  sphinx_url = "#{node[:sphinx][:base_url]}/#{source_file}.tar.gz"
+end
+
 cache_path  = Chef::Config[:file_cache_path]
-sphinx_path = File.join(cache_path, "sphinx-#{node[:sphinx][:version]}-release")
-sphinx_tar = "#{sphinx_path}.tar.gz"
+sphinx_tar = File.join(cache_path, sphinx_url.split("/").last)
+sphinx_path = sphinx_tar.sub(/\.tar\.gz$/, "")
 
 remote_file sphinx_tar do
-  source node[:sphinx][:url]
+  source sphinx_url
   action :create_if_missing
 end
 
@@ -47,12 +66,24 @@ if node[:sphinx][:use_stemmer]
   end
 end
 
+# Build configure flags from attributes, unless configure flags have been
+# manually specified
+configure_flags = node[:sphinx][:configure_flags]
+if configure_flags.nil?
+  configure_flags = [
+    "--prefix=#{node[:sphinx][:install_path]}",
+    node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
+    node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
+    node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql'
+  ]
+end
+
 bash "Build and Install Sphinx Search" do
   cwd sphinx_path
   # use trailing && to break on the first thing.
   # Otherwise the whole block depends on the last line
   code <<-EOH
-    ./configure #{node[:sphinx][:configure_flags].join(" ")} &&
+    ./configure #{configure_flags.join(" ")} &&
     make &&
     make install
   EOH
