@@ -72,6 +72,7 @@ configure_flags = node[:sphinx][:configure_flags]
 if configure_flags.nil?
   configure_flags = [
     "--prefix=#{node[:sphinx][:install_path]}",
+    "--bindir=#{node[:sphinx][:binary_path]}",
     node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
     node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
     node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql'
@@ -87,8 +88,14 @@ bash "Build and Install Sphinx Search" do
     make &&
     make install
   EOH
-  not_if { ::File.exists?( ::File.join(node[:sphinx][:install_path],'bin','searchd') ) }
-  # add additional test to verify of searchd is same as version of sphinx we are installing
-  #  && system("#{node[:sphinx][:install_path]}/bin/ree-version | grep -q '#{node[:sphinx][:version]}$'")
+  not_if {
+    searchd = ::File.join(node[:sphinx][:binary_path],'searchd')
+    searchd_present = ::File.exists?( searchd )
+    searchd_version_correct = searchd_present
+    if searchd_present and node[:sphinx][:version]
+      searchd_version_correct = system("#{searchd} -h | grep \"#{node[:sphinx][:version]}[^\.]\"")
+    end
+    searchd_present && searchd_version_correct
+  }
 end
 
