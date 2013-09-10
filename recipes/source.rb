@@ -81,21 +81,20 @@ end
 
 bash "Build and Install Sphinx Search" do
   cwd sphinx_path
-  # use trailing && to break on the first thing.
-  # Otherwise the whole block depends on the last line
   code <<-EOH
     ./configure #{configure_flags.concat(node[:sphinx][:extra_configure_flags]).uniq.join(" ")} &&
     make &&
     make install
   EOH
   not_if {
-    searchd = ::File.join(node[:sphinx][:binary_path],'searchd')
-    searchd_present = ::File.exists?( searchd )
+    searchd_binary = ::File.join(node[:sphinx][:binary_path], 'searchd')
+    searchd_present = ::File.exists?(searchd_binary)
     searchd_version_correct = searchd_present
+
     if searchd_present and node[:sphinx][:version]
-      searchd_version_correct = system("#{searchd} -h | grep \"#{node[:sphinx][:version]}[^\.]\"")
+      searchd_version_correct = system("#{searchd} -h | head -1 | grep -q \"#{node[:sphinx][:version]}[^\.]\"")
     end
+
     searchd_present && searchd_version_correct
   }
 end
-
