@@ -40,6 +40,10 @@ default_attributes({
 
 ## History
 
+0.6.5
+
+* Percona server support (thanks [@antono](https://github.com/antono))
+
 0.6.4
 
 * Better handling of custom bindir when building from source (thanks [@justinlocsei](https://github.com/justinlocsei))
