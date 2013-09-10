@@ -1,5 +1,6 @@
 default[:sphinx][:use_package]  = false
 default[:sphinx][:install_path] = "/opt/sphinx"
+default[:sphinx][:binary_path]  = "#{sphinx[:install_path]}/bin"
 default[:sphinx][:version]      = nil
 default[:sphinx][:package_name] = nil # depends on platform_family when not explicit
 default[:sphinx][:url]          = nil
