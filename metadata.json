@@ -40,5 +40,5 @@
     "sphinx::package": "Installs sphinx from a package",
     "sphinx::source": "Installs sphinx from source"
   },
-  "version": "0.6.5"
+  "version": "0.6.6"
 }
