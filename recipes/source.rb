@@ -103,7 +103,7 @@ bash "Build and Install Sphinx Search" do
     searchd_version_correct = searchd_present
 
     if searchd_present and node[:sphinx][:version]
-      searchd_version_correct = system("#{searchd} -h | head -1 | grep -q \"#{node[:sphinx][:version]}[^\.]\"")
+      searchd_version_correct = system("#{searchd_binary} -h | head -1 | grep -q \"#{node[:sphinx][:version]}[^\.]\"")
     end
 
     searchd_present && searchd_version_correct
