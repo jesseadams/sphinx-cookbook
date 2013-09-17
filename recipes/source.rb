@@ -29,39 +29,49 @@ if node[:sphinx][:use_percona]
     package 'openssl-devel'
   end
 end
-
-# Set the correct download URL for the requested version of sphinx, accounting
-# for nonstandard URLs, old versions, and beta releases, provided that a default
-# value does not already exist for the URL
-sphinx_url = node[:sphinx][:url]
-if sphinx_url.nil?
-  if node[:sphinx][:version]
-    if node[:sphinx][:version] == "0.9.9"
-        source_file = "archive/sphinx-0.9.9"
-    elsif node[:sphinx][:version] =~ /-[a-z]/ or node[:sphinx][:version].to_f < 1
-      source_file = "sphinx-#{node[:sphinx][:version]}"
-    else
-      source_file = "sphinx-#{node[:sphinx][:version]}-release"
-    end
-  else
-    source_file = "sphinx-2.0.8-release"
-  end
-  sphinx_url = "#{node[:sphinx][:base_url]}/#{source_file}.tar.gz"
-end
-
 cache_path  = Chef::Config[:file_cache_path]
-sphinx_tar = File.join(cache_path, sphinx_url.split("/").last)
-sphinx_path = sphinx_tar.sub(/\.tar\.gz$/, "")
+if node[:sphinx][:source][:get_way] == :get
+  # Set the correct download URL for the requested version of sphinx, accounting
+  # for nonstandard URLs, old versions, and beta releases, provided that a default
+  # value does not already exist for the URL
+  sphinx_url = node[:sphinx][:source][:get][:url]
+  if sphinx_url.nil?
+    if node[:sphinx][:version]
+      if node[:sphinx][:version] == "0.9.9"
+          source_file = "archive/sphinx-0.9.9"
+      elsif node[:sphinx][:version] =~ /-[a-z]/ or node[:sphinx][:version].to_f < 1
+        source_file = "sphinx-#{node[:sphinx][:version]}"
+      else
+        source_file = "sphinx-#{node[:sphinx][:version]}-release"
+      end
+    else
+      source_file = "sphinx-2.0.8-release"
+    end
+    sphinx_url = "#{node[:sphinx][:source][:get][:base_url]}/#{source_file}.tar.gz"
+  end
 
-remote_file sphinx_tar do
-  source sphinx_url
-  action :create_if_missing
-end
+  sphinx_tar = File.join(cache_path, sphinx_url.split("/").last)
+  sphinx_path = sphinx_tar.sub(/\.tar\.gz$/, "")
 
-execute "Extract Sphinx source" do
-  cwd cache_path
-  command "tar -zxvf #{sphinx_tar}"
-  not_if { ::File.exists?(sphinx_path) }
+  remote_file sphinx_tar do
+    source sphinx_url
+    action :create_if_missing
+  end
+
+  execute "Extract Sphinx source" do
+    cwd cache_path
+    command "tar -zxvf #{sphinx_tar}"
+    not_if { ::File.exists?(sphinx_path) }
+  end
+
+elsif node[:sphinx][:source][:get_way] == :svn
+  sphinx_path = "#{cache_path}/sphinx"
+  subversion "sphinx" do
+    repository "#{node[:sphinx][:source][:svn][:url]}/#{node[:sphinx][:source][:svn][:branch]}"
+    revision node[:sphinx][:source][:svn][:revision]
+    destination sphinx_path
+    action :sync
+  end
 end
 
 if node[:sphinx][:use_stemmer]
