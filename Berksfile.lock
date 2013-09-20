@@ -1,0 +1,37 @@
+{
+  "sources": {
+    "sphinx": {
+      "path": "."
+    },
+    "minitest-handler": {
+      "locked_version": "0.2.1"
+    },
+    "sphinx_test": {
+      "path": "./test/cookbooks/sphinx_test"
+    },
+    "build-essential": {
+      "locked_version": "1.1.2"
+    },
+    "mysql": {
+      "locked_version": "3.0.2"
+    },
+    "openssl": {
+      "locked_version": "1.0.0"
+    },
+    "percona": {
+      "locked_version": "0.14.5"
+    },
+    "apt": {
+      "locked_version": "2.1.1"
+    },
+    "yum": {
+      "locked_version": "2.3.2"
+    },
+    "postgresql": {
+      "locked_version": "1.0.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    }
+  }
+}

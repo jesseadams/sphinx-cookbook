@@ -40,6 +40,10 @@ default_attributes({
 
 ## History
 
+0.6.7
+
+* Added test-kitchen, chefspec, and basic tests
+
 0.6.6
 
 * Fix for variable naming mismatch introduced in 0.6.4 (thanks [@thewebfellas](https://github.com/thewebfellas))
