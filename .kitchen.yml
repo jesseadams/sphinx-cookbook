@@ -21,7 +21,7 @@ platforms:
   - recipe[sphinx]
 
 suites:
-- name: source-install
+- name: source-install-http
   run_list:
   - recipe[minitest-handler]
   - recipe[sphinx_test]
@@ -29,10 +29,18 @@ suites:
     sphinx:
       version: '2.0.8'
 
+- name: source-install-svn
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[sphinx_test]
+  attributes:
+    sphinx:
+      retrieve_method: 'svn'
+
 - name: package-install
   run_list:
   - recipe[minitest-handler]
   - recipe[sphinx_test]
   attributes:
     sphinx:
-      use_package: true
+      install_method: 'package'
