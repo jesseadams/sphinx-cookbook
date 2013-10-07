@@ -19,6 +19,7 @@ depends          "percona"
 depends          "postgresql"
 depends          "yum", ">= 2.0.0"
 depends          "apt"
+depends          "runit", "~> 1.0"
 
 supports         "centos"
 supports         "rhel"

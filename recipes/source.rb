@@ -31,7 +31,7 @@ if node[:sphinx][:use_percona]
     package 'openssl-devel'
   end
 end
-
+cache_path  = Chef::Config[:file_cache_path]
 include_recipe "sphinx::_source_from_#{node[:sphinx][:source][:retrieve_method]}"
 
 if node[:sphinx][:use_stemmer]
@@ -42,8 +42,8 @@ if node[:sphinx][:use_stemmer]
 
   execute "Extract libstemmer source" do
     cwd Chef::Config[:file_cache_path]
-    command "tar -C #{sphinx_path} -zxf libstemmer_c.tgz"
-    not_if { ::File.exists?("#{sphinx_path}/libstemmer_c/src_c") }
+    command "tar -C #{cache_path} -zxf libstemmer_c.tgz"
+    not_if { ::File.exists?("#{cache_path}/libstemmer_c/src_c") }
   end
 end
 
