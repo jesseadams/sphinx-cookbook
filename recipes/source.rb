@@ -10,10 +10,18 @@ template "#{node[:sphinx][:source][:install_path]}/sphinx.conf" do
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0644'
-  variables :install_path => node[:sphinx][:install_path],
+  variables :install_path => node[:sphinx][:source][:install_path],
             :searchd => node[:sphinx][:searchd],
             :indexer => node[:sphinx][:indexer]
 end
+
+file node[:sphinx][:searchd][:pid_file] do
+  owner "root"
+  group "root"
+  mode "0755"
+  action :create
+end
+
 
 directory "#{node[:sphinx][:source][:install_path]}/conf.d" do
   owner node[:sphinx][:user]
@@ -32,10 +40,11 @@ if node[:sphinx][:use_percona]
   end
 end
 
+sphinx_path = File.join(Chef::Config[:file_cache_path], 'sphinx')
 include_recipe "sphinx::_source_from_#{node[:sphinx][:source][:retrieve_method]}"
 
 if node[:sphinx][:use_stemmer]
-  remote_file File.join(cache_path, "libstemmer_c.tgz") do
+  remote_file File.join(sphinx_path, "libstemmer_c.tgz") do
     source node[:sphinx][:source][:stemmer_url]
     action :create_if_missing
   end
