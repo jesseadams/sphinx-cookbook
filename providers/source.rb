@@ -1,6 +1,6 @@
 action :create do
 
-    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_source.txt"
+    conf_path = "#{node[:sphinx][:source][:install_path]}/conf.d/#{new_resource.name}_source.txt"
 
     template conf_path do
         cookbook "sphinx"
@@ -17,7 +17,7 @@ end
 
 action :delete do
 
-    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_source.txt"
+    conf_path = "#{node[:sphinx][:source][:install_path]}/conf.d/#{new_resource.name}_source.txt"
 
     execute "Deleting #{new_resource.name}" do
         command "rm #{conf_path}"

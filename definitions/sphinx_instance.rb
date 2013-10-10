@@ -18,19 +18,18 @@
 #
 
 define :sphinx_instance do
-  include_recipe 'runit::default'
   include_recipe 'sphinx::default'
 
   opts = params
 
-  runit_service "sphinx-#{params[:name]}" do
-    run_template_name 'sphinx'
-    default_logger    true
-    cookbook          'sphinx'
-    options({
-      :bin_path  => '/usr/bin/searchd',
-      :conf_path => '/vagrant/sphinx/sphinx.rt.conf',
-      :user    => node[:sphinx][:user]
+  template "/etc/init.d/sphinx_#{params[:name]}" do
+    source "sphinx-init.erb"
+    cookbook "sphinx"
+    mode 0655
+    variables({
+      :bin_path  => "#{node[:sphinx][:source][:install_path]}/bin/searchd",
+      :conf_path => "#{node[:sphinx][:source][:install_path]}/sphinx.conf",
+      :pid_file => node[:sphinx][:searchd][:pid_file],
     }.merge(opts))
   end
 end
