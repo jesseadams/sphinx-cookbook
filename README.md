@@ -1,3 +1,5 @@
+[![Travis CI](https://travis-ci.org/jesseadams/sphinx-cookbook.png)](https://travis-ci.org/jesseadams/sphinx-cookbook)
+
 ## Description
 
 Installs and configures Sphinx search (searchd). Installation can by from source (http or svn)  or package.
