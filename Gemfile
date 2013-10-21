@@ -4,3 +4,4 @@ gem 'berkshelf'
 gem 'test-kitchen', ">= 1.0.0.beta"
 gem 'kitchen-vagrant'
 gem 'chefspec'
+gem 'foodcritic'
