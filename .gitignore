@@ -1,0 +1,5 @@
+.kitchen/
+.kitchen.local.yml
+metadata.json
+vendor/
+.chef
