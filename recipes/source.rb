@@ -10,7 +10,7 @@ template "#{node[:sphinx][:source][:install_path]}/sphinx.conf" do
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0644'
-  variables :install_path => node[:sphinx][:install_path],
+  variables :install_path => node[:sphinx][:source][:install_path],
             :searchd => node[:sphinx][:searchd],
             :indexer => node[:sphinx][:indexer]
 end
