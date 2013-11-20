@@ -92,7 +92,7 @@ default_attributes({
 
 ## History
 
-See [CHANGELOG.md](https://github.com/jesseadams/sphinx-cookbook/blob/master/README.md)
+See [CHANGELOG.md](https://github.com/jesseadams/sphinx-cookbook/blob/master/CHANGELOG.md)
 
 ## Maintainers
 
