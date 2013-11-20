@@ -1,4 +1,4 @@
-1.0.1
+1.0.1/1.0.2
 
 * Fixed install_path for source installations (thanks [@balbeko](https://github.com/balbeko))
 * Upgraded to ChefSpec 3
