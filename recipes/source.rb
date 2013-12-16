@@ -1,5 +1,8 @@
 include_recipe "build-essential"
 
+cache_path  = Chef::Config[:file_cache_path]
+sphinx_path = File.join(cache_path, 'sphinx')
+
 # Setup directory structures
 directory node[:sphinx][:source][:install_path] do
   recursive true
