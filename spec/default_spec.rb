@@ -7,6 +7,7 @@ describe 'sphinx::default' do
         runner = ChefSpec::Runner.new()
         runner.node.set['sphinx']['install_method'] = 'package'
         runner.node.set['platform_family'] = 'debian'
+        runner.node.set['lsb']['codename'] = 'precise'
         runner.converge('sphinx::default')
       end
 
@@ -37,6 +38,7 @@ describe 'sphinx::default' do
             runner = ChefSpec::Runner.new(:log_level => :debug)
             runner.node.set['sphinx']['version'] = '2.0.8'
             runner.node.set['platform_family'] = 'debian'
+            runner.node.set['lsb']['codename'] = 'precise'
             runner.converge('sphinx::default')
           end
 
