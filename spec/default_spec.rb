@@ -7,6 +7,7 @@ describe 'sphinx::default' do
         runner = ChefSpec::Runner.new()
         runner.node.set['sphinx']['install_method'] = 'package'
         runner.node.set['platform_family'] = 'debian'
+        runner.node.set['lsb']['codename'] = 'precise'
         runner.converge('sphinx::default')
       end
 
@@ -30,25 +31,22 @@ describe 'sphinx::default' do
   end
 
   context 'installation method: source' do
-    context 'retrieve method: http' do
-      context 'version: 2.0.8' do
-        let(:chef_run) do
-          runner = ChefSpec::Runner.new(:log_level => :debug)
-          runner.node.set['sphinx']['version'] = '2.0.8'
-          runner.converge('sphinx::default')
-        end
+    context 'platform: debian' do
+      context 'retrieve method: http' do
+        context 'version: 2.0.8' do
+          let(:chef_run) do
+            runner = ChefSpec::Runner.new(:log_level => :debug)
+            runner.node.set['sphinx']['version'] = '2.0.8'
+            runner.node.set['platform_family'] = 'debian'
+            runner.node.set['lsb']['codename'] = 'precise'
+            runner.converge('sphinx::default')
+          end
 
-        it 'should create a sphinx config with the appropriate install_path' do
-          regex = /Put files to be included in \/usr\/local\/conf.d/
-          expect(chef_run).to render_file('/usr/local/sphinx.conf').with_content(regex)
+          it 'should create a sphinx config with the appropriate install_path' do
+            regex = /Put files to be included in \/usr\/local\/conf.d/
+            expect(chef_run).to render_file('/usr/local/sphinx.conf').with_content(regex)
+          end
         end
-
-#        it 'should create a remote file ' do
-#          expect(chef_run).to create_remote_file('/tmp/sphinx-2.0.8-release.tar.gz')
-#          expect(runner).to create_remote_file_if_missing('sphinx-2.0.8-release.tar.gz').with(
-#            :source => 'http://sphinxsearch.com/files/sphinx-2.0.8-release.tar.gz'
-#          )
-#        end
       end
     end
   end

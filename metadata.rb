@@ -13,10 +13,10 @@ provides         "sphinx::default"
 provides         "sphinx::package"
 provides         "sphinx::source"
 
-depends          "build-essential", "1.1.2"
+depends          "build-essential", ">= 1.1.2"
 depends          "mysql"
 depends          "percona"
-depends          "postgresql", "1.0.0"
+depends          "postgresql", ">= 1.0.0"
 depends          "yum", ">= 2.0.0"
 depends          "apt"
 
