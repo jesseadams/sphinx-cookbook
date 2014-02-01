@@ -1,3 +1,8 @@
+1.0.3
+
+* Loosened dependencies on other cookbooks (thanks for assistance [@chris-at-thewebfellas](https://github.com/chris-at-thewebfellas))
+* Fixed regression with stemmer
+
 1.0.1/1.0.2
 
 * Fixed install_path for source installations (thanks [@balbeko](https://github.com/balbeko))
