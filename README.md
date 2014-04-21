@@ -29,7 +29,7 @@ default_attributes({
   'sphinx' => {
     'use_mysql'   => true,
     'install_method' => 'source',
-    'version => '2.0.8'
+    'version' => '2.0.8'
   }
 })
 
