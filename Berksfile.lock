@@ -1,37 +1,38 @@
-{
-  "sources": {
-    "sphinx": {
-      "path": "."
-    },
-    "minitest-handler": {
-      "locked_version": "0.2.1"
-    },
-    "sphinx_test": {
-      "path": "./test/cookbooks/sphinx_test"
-    },
-    "build-essential": {
-      "locked_version": "1.4.2"
-    },
-    "mysql": {
-      "locked_version": "3.0.4"
-    },
-    "openssl": {
-      "locked_version": "1.1.0"
-    },
-    "percona": {
-      "locked_version": "0.14.5"
-    },
-    "apt": {
-      "locked_version": "2.1.1"
-    },
-    "yum": {
-      "locked_version": "3.0.4"
-    },
-    "postgresql": {
-      "locked_version": "3.3.4"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.4"
-    }
-  }
-}
+DEPENDENCIES
+  minitest-handler
+    git: git://github.com/btm/minitest-handler-cookbook.git
+    revision: 927aea60705339db0d71de8e4d8314cb8f419fc3
+  sphinx
+    path: .
+    metadata: true
+  sphinx_test
+    path: test/cookbooks/sphinx_test
+
+GRAPH
+  apt (2.4.0)
+  build-essential (2.0.2)
+  chef_handler (1.1.6)
+  minitest-handler (1.2.1)
+    chef_handler (>= 0.0.0)
+  mysql (5.2.10)
+  openssl (1.1.0)
+  percona (0.15.1)
+    apt (>= 1.9)
+    openssl (>= 0.0.0)
+    yum (~> 3.0)
+  postgresql (3.4.0)
+    apt (>= 1.9.0)
+    build-essential (>= 0.0.0)
+    openssl (>= 0.0.0)
+  sphinx (1.0.4)
+    apt (>= 0.0.0)
+    build-essential (>= 1.1.2)
+    mysql (>= 0.0.0)
+    percona (>= 0.0.0)
+    postgresql (>= 1.0.0)
+    yum (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  sphinx_test (1.0.0)
+  yum (3.2.0)
+  yum-epel (0.3.6)
+    yum (~> 3.0)

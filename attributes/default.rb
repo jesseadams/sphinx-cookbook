@@ -22,7 +22,7 @@ default[:sphinx][:source][:revision]              = 'HEAD'
 
 # Package Installation Settings
 default[:sphinx][:package][:name]     = nil # depends on platform_family when not explicit
-default[:sphinx][:package][:yum_repo] = 'yum::epel' # yum recipe or nil
+default[:sphinx][:package][:yum_repo] = 'yum-epel' # yum recipe or nil
 
 # Search daemon settings
 default[:sphinx][:searchd][:listen]       = ["0.0.0.0:9312"]

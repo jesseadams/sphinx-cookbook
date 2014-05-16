@@ -1,3 +1,8 @@
+1.0.4
+
+* Updated berfkshelf to version 3
+* Fix dependencies from yum book update that place the epel repo to it's own cookbook
+
 1.0.3
 
 * Loosened dependencies on other cookbooks (thanks for assistance [@chris-at-thewebfellas](https://github.com/chris-at-thewebfellas))
