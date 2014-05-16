@@ -10,28 +10,31 @@
       "path": "./test/cookbooks/sphinx_test"
     },
     "build-essential": {
-      "locked_version": "1.4.2"
+      "locked_version": "2.0.2"
     },
     "mysql": {
-      "locked_version": "3.0.4"
+      "locked_version": "5.2.10"
+    },
+    "percona": {
+      "locked_version": "0.15.1"
+    },
+    "apt": {
+      "locked_version": "2.4.0"
+    },
+    "yum": {
+      "locked_version": "3.2.0"
     },
     "openssl": {
       "locked_version": "1.1.0"
     },
-    "percona": {
-      "locked_version": "0.14.5"
-    },
-    "apt": {
-      "locked_version": "2.1.1"
-    },
-    "yum": {
-      "locked_version": "3.0.4"
-    },
     "postgresql": {
-      "locked_version": "3.3.4"
+      "locked_version": "3.4.0"
+    },
+    "yum-epel": {
+      "locked_version": "0.3.6"
     },
     "chef_handler": {
-      "locked_version": "1.1.4"
+      "locked_version": "1.1.6"
     }
   }
 }
