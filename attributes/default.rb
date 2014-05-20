@@ -20,6 +20,10 @@ default[:sphinx][:source][:extra_configure_flags] = []
 default[:sphinx][:source][:branch]                = 'trunk'
 default[:sphinx][:source][:revision]              = 'HEAD'
 
+# Package installation via RPM or RPM
+#default[:sphinx][:package][:name]                  = "sphinx-2.2.3-1.rhel6.x86_64.rpm"
+default[:sphinx][:package][:base_url]              = "http://sphinxsearch.com/files"
+
 # Package Installation Settings
 default[:sphinx][:package][:name]     = nil # depends on platform_family when not explicit
 default[:sphinx][:package][:yum_repo] = 'yum-epel' # yum recipe or nil
