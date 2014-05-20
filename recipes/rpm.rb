@@ -1,7 +1,7 @@
 sphinx_rpm = node[:sphinx][:package][:name]
 sphinx_rpm_url = "#{node[:sphinx][:package][:base_url]}/#{node[:sphinx][:package][:name]}"
 
-remote_file "{#Chef::Config[:file_cache_path]}/{#sphinx_rpm}" do
+remote_file "#{Chef::Config[:file_cache_path]}/#{sphinx_rpm}" do
   source sphinx_rpm_url
   action :create_if_missing
 end
