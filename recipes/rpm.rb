@@ -1,5 +1,5 @@
-sphinx_rpm = node[:sphinx][:package][:name]
-sphinx_rpm_url = "#{node[:sphinx][:package][:base_url]}/#{node[:sphinx][:package][:name]}"
+sphinx_rpm = node[:sphinx][:rpm][:name]
+sphinx_rpm_url = "#{node[:sphinx][:rpm][:base_url]}/#{node[:sphinx][:rpm][:name]}"
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{sphinx_rpm}" do
   source sphinx_rpm_url
@@ -48,7 +48,7 @@ template "/etc/sphinx/sphinx.conf" do
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0644'
-  variables :install_path => node[:sphinx][:package][:conf_path],
+  variables :install_path => node[:sphinx][:rpm][:conf_path],
             :searchd => node[:sphinx][:searchd],
             :indexer => node[:sphinx][:indexer]
 end
