@@ -21,6 +21,12 @@ rpm_package sphinx_rpm do
   action :install
 end
 
+#delete the default config on first run
+execute "rm -f /etc/sphinx/sphinx.conf" do
+  command "rm -f /etc/sphinx/sphinx.conf"
+  not_if { ::File.exists?("/etc/sphinx/sphinx.conf")}
+end
+
 #create direcotry for providers
 directory '/etc/sphinx/conf.d/' do
   owner 'root'
