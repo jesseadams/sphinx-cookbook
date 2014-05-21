@@ -24,7 +24,7 @@ end
 #delete the default config on first run
 execute "rm -f /etc/sphinx/sphinx.conf" do
   command "rm -f /etc/sphinx/sphinx.conf"
-  not_if { ::File.exists?("/etc/sphinx/sphinx.conf")}
+  not_if { ::File.exists?("/etc/sphinx/conf.d")}
 end
 
 #create direcotry for providers
