@@ -43,7 +43,7 @@ directory '/etc/sphinx/data/' do
   action :create
 end
 
-template "#{node[:sphinx][:source][:install_path]}/sphinx.conf" do
+template "/etc/sphinx/sphinx.conf" do
   source "sphinx.conf.erb"
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
