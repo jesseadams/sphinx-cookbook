@@ -35,7 +35,7 @@ directory '/etc/sphinx/conf.d/' do
   action :create
 end
 
-#create direcotry for providers
+#create direcotry for index
 directory '/etc/sphinx/data/' do
   owner 'root'
   group 'root'
@@ -48,7 +48,7 @@ template "/etc/sphinx/sphinx.conf" do
   owner node[:sphinx][:user]
   group node[:sphinx][:group]
   mode '0644'
-  variables :install_path => node[:sphinx][:source][:install_path],
+  variables :install_path => node[:sphinx][:package][:conf_path],
             :searchd => node[:sphinx][:searchd],
             :indexer => node[:sphinx][:indexer]
 end
