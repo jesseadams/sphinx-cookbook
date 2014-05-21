@@ -35,6 +35,24 @@ directory '/etc/sphinx/conf.d/' do
   action :create
 end
 
+#create direcotry for providers
+directory '/etc/sphinx/data/' do
+  owner 'root'
+  group 'root'
+  mode 0755
+  action :create
+end
+
+template "#{node[:sphinx][:source][:install_path]}/sphinx.conf" do
+  source "sphinx.conf.erb"
+  owner node[:sphinx][:user]
+  group node[:sphinx][:group]
+  mode '0644'
+  variables :install_path => node[:sphinx][:source][:install_path],
+            :searchd => node[:sphinx][:searchd],
+            :indexer => node[:sphinx][:indexer]
+end
+
 #service "searchd" do
 #  supports :start => true, :stop => true, :restart => true
 #  action :nothing
