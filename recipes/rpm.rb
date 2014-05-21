@@ -21,6 +21,14 @@ rpm_package sphinx_rpm do
   action :install
 end
 
+#create direcotry for providers
+directory '/etc/sphinx/conf.d/' do
+  owner 'root'
+  gropu 'root'
+  mode 0755
+  action :create
+end
+
 #service "searchd" do
 #  supports :start => true, :stop => true, :restart => true
 #  action :nothing
