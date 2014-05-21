@@ -24,7 +24,7 @@ end
 #create direcotry for providers
 directory '/etc/sphinx/conf.d/' do
   owner 'root'
-  gropu 'root'
+  group 'root'
   mode 0755
   action :create
 end
