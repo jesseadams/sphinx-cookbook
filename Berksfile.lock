@@ -4,34 +4,39 @@
       "path": "."
     },
     "minitest-handler": {
-      "locked_version": "0.2.1"
+      "locked_version": "1.2.1",
+      "git": "git://github.com/btm/minitest-handler-cookbook.git",
+      "ref": "1a5924a88243947a77eb0981c4109e2ccaeeb26f"
     },
     "sphinx_test": {
       "path": "./test/cookbooks/sphinx_test"
     },
     "build-essential": {
-      "locked_version": "1.4.2"
+      "locked_version": "2.0.2"
     },
     "mysql": {
-      "locked_version": "3.0.4"
+      "locked_version": "5.2.12"
+    },
+    "percona": {
+      "locked_version": "0.15.1"
+    },
+    "apt": {
+      "locked_version": "2.4.0"
+    },
+    "yum": {
+      "locked_version": "3.2.0"
     },
     "openssl": {
       "locked_version": "1.1.0"
     },
-    "percona": {
-      "locked_version": "0.14.5"
-    },
-    "apt": {
-      "locked_version": "2.1.1"
-    },
-    "yum": {
-      "locked_version": "3.0.4"
-    },
     "postgresql": {
-      "locked_version": "3.3.4"
+      "locked_version": "3.4.0"
+    },
+    "yum-epel": {
+      "locked_version": "0.3.6"
     },
     "chef_handler": {
-      "locked_version": "1.1.4"
+      "locked_version": "1.1.6"
     }
   }
 }

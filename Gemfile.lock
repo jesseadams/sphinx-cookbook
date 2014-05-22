@@ -228,4 +228,4 @@ DEPENDENCIES
   foodcritic
   kitchen-vagrant
   rspec-core
-  test-kitchen (>= 1.0.0.beta)
+  test-kitchen
