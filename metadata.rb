@@ -8,10 +8,12 @@ version          "1.0.3"
 recipe           "sphinx", "Installs sphinx"
 recipe           "sphinx::package", "Installs sphinx from a package"
 recipe           "sphinx::source", "Installs sphinx from source"
+recipe           "sphinx::rpm", "Installs sphinx from rpm"
 
 provides         "sphinx::default"
 provides         "sphinx::package"
 provides         "sphinx::source"
+provides         "sphinx::rpm"
 
 depends          "build-essential", ">= 1.1.2"
 depends          "mysql"

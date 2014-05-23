@@ -50,4 +50,23 @@ describe 'sphinx::default' do
       end
     end
   end
+
+  context 'installation method: rpm' do
+    context 'platform: redhat' do
+      let(:chef_run) do
+        runner = ChefSpec::Runner.new(:log_level => :debug)
+        runner.node.set['sphinx']['install_method'] = 'rpm'
+        runner.node.set['sphinx']['rpm']['name'] = 'sphinx-2.2.3-1.rhel6.x86_64.rpm'
+        runner.node.set['sphinx']['rpm']['base_url'] = 'http://sphinxsearch.com/files/'
+        runner.node.set['platform_family'] = 'redhat'
+        runner.converge('sphinx::default')
+      end
+
+      it 'installs sphinx package via rpm' do
+        regex = /Put files to be included in \/etc\/sphinx\/conf.d/
+        expect(chef_run).to render_file('/etc/sphinx/sphinx.conf').with_content(regex)
+      end
+    end
+  end
+
 end
