@@ -18,7 +18,7 @@
       "locked_version": "5.2.12"
     },
     "percona": {
-      "locked_version": "0.15.1"
+      "locked_version": "0.15.2"
     },
     "apt": {
       "locked_version": "2.4.0"
