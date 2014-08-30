@@ -12,7 +12,14 @@ shopt -s nullglob
 cat <<EOT
 searchd {
 <% @searchd.each do |k, v| %>
+  <% if v.respond_to?("each") %>
+    <% v.each do |sub_v| %>
+      <%= k %> = <%= sub_v %>
+    <% end %>
+  <% else %>
     <%= k %>=<%= v %>
+  <% end %>
+
 <% end %>
 }
 EOT
