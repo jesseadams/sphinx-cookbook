@@ -1,3 +1,8 @@
+1.1.0
+
+* Tons of housekeeping from (thanks [@devx](https://github.com/devx))
+* Upgraded rspec and chefspec and fixed tests
+
 1.0.3
 
 * Loosened dependencies on other cookbooks (thanks for assistance [@chris-at-thewebfellas](https://github.com/chris-at-thewebfellas))

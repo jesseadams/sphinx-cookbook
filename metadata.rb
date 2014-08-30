@@ -3,7 +3,7 @@ maintainer       "Jesse R. Adams"
 maintainer_email "jesse@techno-geeks.org"
 license          "Apache 2.0"
 description      "Installs/Configures sphinx search engine."
-version          "1.0.3"
+version          "1.1.0"
 
 recipe           "sphinx", "Installs sphinx"
 recipe           "sphinx::package", "Installs sphinx from a package"
