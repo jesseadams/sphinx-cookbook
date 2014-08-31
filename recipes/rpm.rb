@@ -1,5 +1,5 @@
 sphinx_rpm = node[:sphinx][:rpm][:name]
-sphinx_rpm_url = "#{node[:sphinx][:rpm][:base_url]}/#{node[:sphinx][:rpm][:name]}"
+sphinx_rpm_url = "#{node[:sphinx][:repo][:base_url]}/#{node[:sphinx][:rpm][:name]}"
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{sphinx_rpm}" do
   source sphinx_rpm_url
