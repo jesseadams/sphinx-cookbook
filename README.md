@@ -90,6 +90,41 @@ default_attributes({
 #override_attributes()
 ```
 
+### Debian upstream package install
+
+Here is an example role using MySQL with a package install, using the latest packages.
+
+```ruby
+name "sphinx"
+description "Sphinx search daemon (searchd)"
+
+run_list(
+  "role[base]",
+  "recipe[sphinx]",
+)
+
+default_attributes({
+  'sphinx' => {
+    'version' => '2.1.9',
+    'install_method' => 'debian_package'
+  }
+})
+```
+
+If you want to override Debian package name ( if you are using squeeze ), you can set the debian package name as follows:
+
+```ruby
+default_attributes({
+  'sphinx' => {
+    'install_method' => 'debian_package',
+    'version' => '2.1.9',
+    'debian_package' => {
+      'name' => 'sphinxsearch_2.1.9-release-1_amd64.deb'
+    }
+  }
+})
+```
+
 ## History
 
 See [CHANGELOG.md](https://github.com/jesseadams/sphinx-cookbook/blob/master/CHANGELOG.md)
