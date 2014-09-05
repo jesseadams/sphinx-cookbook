@@ -1,4 +1,4 @@
-sphinx_deb = node[:sphinx][:debian_package][:name] % {
+sphinx_deb = node[:sphinx][:deb][:name] % {
   version: node[:sphinx][:version],
   codename: node[:lsb][:codename],
   arch: node[:kernel][:machine] == 'x86_64' ? 'amd64' : 'i386'
@@ -11,7 +11,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{sphinx_deb}" do
 end
 
 file '/etc/default/sphinxsearch' do
-  content "START=#{node[:sphinx][:debian_package][:autostart]}"
+  content "START=#{node[:sphinx][:deb][:autostart]}"
   owner 'root'
   group 'root'
   mode 0644
@@ -23,7 +23,7 @@ dpkg_package sphinx_deb do
   options '--force-confold'
 end
 
-base_conf_dir = node[:sphinx][:debian_package][:conf_path]
+base_conf_dir = node[:sphinx][:deb][:conf_path]
 directory "#{base_conf_dir}/conf.d" do
   owner 'root'
   group 'root'
@@ -31,7 +31,7 @@ directory "#{base_conf_dir}/conf.d" do
   action :create
 end
 
-base_var_dir = node[:sphinx][:debian_package][:var_path]
+base_var_dir = node[:sphinx][:deb][:var_path]
 directory "#{base_var_dir}/data" do
   owner 'root'
   group 'root'
@@ -45,7 +45,7 @@ template "#{base_conf_dir}/sphinx.conf" do
   group node[:sphinx][:group]
   mode '0644'
   variables(
-    :install_path => node[:sphinx][:debian_package][:conf_path],
+    :install_path => node[:sphinx][:deb][:conf_path],
     :searchd => node[:sphinx][:searchd],
     :indexer => node[:sphinx][:indexer]
   )

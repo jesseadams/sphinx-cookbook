@@ -50,12 +50,12 @@ describe 'sphinx::default' do
       end
     end
 
-    context 'installation method: debian_package' do
+    context 'installation method: deb' do
       context 'version: 2.1.9' do
         let(:chef_run) do
           runner = ChefSpec::Runner.new(platform: 'debian', version: '7.5')
           runner.node.set['sphinx']['version'] = '2.1.9'
-          runner.node.set['sphinx']['install_method'] = 'debian_package'
+          runner.node.set['sphinx']['install_method'] = 'deb'
           runner.node.set['platform_family'] = 'debian'
           runner.node.set['lsb']['codename'] = 'wheezy'
           runner.converge('sphinx::default')

@@ -106,7 +106,7 @@ run_list(
 default_attributes({
   'sphinx' => {
     'version' => '2.1.9',
-    'install_method' => 'debian_package'
+    'install_method' => 'deb'
   }
 })
 ```
@@ -116,9 +116,9 @@ If you want to override Debian package name ( if you are using squeeze ), you ca
 ```ruby
 default_attributes({
   'sphinx' => {
-    'install_method' => 'debian_package',
+    'install_method' => 'deb',
     'version' => '2.1.9',
-    'debian_package' => {
+    'deb' => {
       'name' => 'sphinxsearch_2.1.9-release-1_amd64.deb'
     }
   }

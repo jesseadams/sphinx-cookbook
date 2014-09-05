@@ -27,10 +27,10 @@ default[:sphinx][:rpm][:conf_path] = '/etc/sphinx'
 default[:sphinx][:rpm][:name]      = 'sphinx-2.2.3-1.rhel6.x86_64.rpm'
 
 # Package installation via DEB
-default[:sphinx][:debian_package][:conf_path] = '/etc/sphinxsearch'
-default[:sphinx][:debian_package][:var_path]  = '/var/lib/sphinxsearch'
-default[:sphinx][:debian_package][:name]      = 'sphinxsearch_%{version}-release-1~%{codename}_%{arch}.deb'
-default[:sphinx][:debian_package][:autostart] = 'no'
+default[:sphinx][:deb][:conf_path] = '/etc/sphinxsearch'
+default[:sphinx][:deb][:var_path]  = '/var/lib/sphinxsearch'
+default[:sphinx][:deb][:name]      = 'sphinxsearch_%{version}-release-1~%{codename}_%{arch}.deb'
+default[:sphinx][:deb][:autostart] = 'no'
 
 # Package Installation Settings
 default[:sphinx][:package][:name]     = nil # depends on platform_family when not explicit
