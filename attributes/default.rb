@@ -42,3 +42,13 @@ default[:sphinx][:searchd][:max_matches]  = 1000
 default[:sphinx][:indexer][:mem_limit]             = "32M"
 default[:sphinx][:indexer][:write_buffer]          = "1M"
 default[:sphinx][:indexer][:max_file_field_buffer] = "8M"
+
+# Platform dependent settings
+case node[:platform_family]
+when 'debian'
+  default[:sphinx][:package][:name] = 'sphinxsearch'
+when 'rhel'
+  default[:sphinx][:package][:name] = 'sphinx'
+else
+  default[:sphinx][:package][:name] = 'sphinx'
+end

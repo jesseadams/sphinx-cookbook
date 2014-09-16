@@ -3,3 +3,4 @@
 metadata.json
 vendor/
 .chef
+Berksfile.lock
