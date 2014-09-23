@@ -21,7 +21,6 @@ default[:sphinx][:source][:branch]                = 'trunk'
 default[:sphinx][:source][:revision]              = 'HEAD'
 
 # Package installation via RPM
-default[:sphinx][:rpm][:conf_path]             = '/etc/sphinx'
 default[:sphinx][:rpm][:name]                  = "sphinx-2.2.3-1.rhel6.x86_64.rpm"
 default[:sphinx][:rpm][:base_url]              = "http://sphinxsearch.com/files/"
 
@@ -31,9 +30,6 @@ default[:sphinx][:package][:yum_repo] = 'yum-epel' # yum recipe or nil
 
 # Search daemon settings
 default[:sphinx][:searchd][:listen]       = ["0.0.0.0:9312"]
-default[:sphinx][:searchd][:log]          = "/var/log/sphinx/sphinx.log"
-default[:sphinx][:searchd][:query_log]    = "/var/log/sphinx/query.log"
-default[:sphinx][:searchd][:pid_file]     = "/tmp/sphinx.pid"
 default[:sphinx][:searchd][:read_timeout] = 5
 default[:sphinx][:searchd][:max_children] = 30
 default[:sphinx][:searchd][:max_matches]  = 1000
@@ -47,8 +43,23 @@ default[:sphinx][:indexer][:max_file_field_buffer] = "8M"
 case node[:platform_family]
 when 'debian'
   default[:sphinx][:package][:name] = 'sphinxsearch'
+  default[:sphinx][:package][:conf_path] = '/etc/sphinxsearch'
+  default[:sphinx][:package][:data_dir] = '/var/lib/sphinxsearch/data'
+  default[:sphinx][:package][:log_dir] = '/var/log/sphinxsearch'
+  default[:sphinx][:searchd][:log] = "/var/log/sphinxsearch/sphinx.log"
+  default[:sphinx][:searchd][:query_log] = "/var/log/sphinxsearch/query.log"
+  default[:sphinx][:searchd][:pid_file] = "/var/run/sphinxsearch/searchd.pid"
+  default[:sphinx][:package][:daemon] = "sphinxsearch"
 when 'rhel'
   default[:sphinx][:package][:name] = 'sphinx'
+  default[:sphinx][:package][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:package][:data_dir] = '/var/lib/sphinx'
+  default[:sphinx][:package][:log_dir] = '/var/log/sphinx'
+  default[:sphinx][:searchd][:log] = "/var/log/sphinx/sphinx.log"
+  default[:sphinx][:searchd][:query_log] = "/var/log/sphinx/query.log"
+  default[:sphinx][:searchd][:pid_file] = "/var/run/sphinx/searchd.pid"
+  default[:sphinx][:package][:daemon] = "searchd"
 else
   default[:sphinx][:package][:name] = 'sphinx'
+  default[:sphinx][:package][:conf_path] = '/etc/sphinx'
 end

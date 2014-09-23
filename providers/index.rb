@@ -1,21 +1,28 @@
-action :create do
-
-    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_index.txt"
-    data_path = "#{node[:sphinx][:install_path]}/data/#{new_resource.name}_index"
-
-    template conf_path do
-        cookbook "sphinx"
-        source "index.erb"
-        owner node[:sphinx][:user]
-        group node[:sphinx][:group]
-        mode 0755
-        variables :new_resource => new_resource,
-            :data_path => data_path
-    end
-
-    new_resource.updated_by_last_action(true)
+def whyrun_supported?
+  true
 end
 
+use_inline_resources if defined?(use_inline_resources)
+
+action :create do
+  if node[:sphinx][:install_method] == 'source'
+    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_index.txt"
+    data_path = "#{node[:sphinx][:install_path]}/data/#{new_resource.name}_index"
+  else
+    conf_path = "#{node[:sphinx][:package][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+    data_path = "#{node[:sphinx][:package][:data_dir]}/#{new_resource.name}_index"
+  end
+
+  template conf_path do
+      cookbook "sphinx"
+      source "index.erb"
+      owner node[:sphinx][:user]
+      group node[:sphinx][:group]
+      mode 0755
+      variables :new_resource => new_resource,
+          :data_path => data_path
+  end
+end
 
 action :reindex do
     execute "Reindexing #{new_resource.name}" do
@@ -28,12 +35,16 @@ action :reindex do
 end
 
 action :delete do
-
+  if node[:sphinx][:install_method] == 'source'
     conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_index.txt"
+  else
+    conf_path = "#{node[:sphinx][:package][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+  end
 
-    execute "Deleting #{new_resource.name}" do
-        command "rm #{conf_path}"
-    end
+  execute "Deleting #{new_resource.name}" do
+    command "rm #{conf_path}"
+    notifies :restart, "service[#{node[:sphinx][:package][:daemon]}]"
+  end
 
-    new_resource.updated_by_last_action(true)
+  new_resource.updated_by_last_action(true)
 end
