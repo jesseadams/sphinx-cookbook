@@ -1,7 +1,68 @@
 index <%= @new_resource.name %> {
-    source = <%= @new_resource.source %>
-    path  = <%= @data_path %>
-<% @new_resource.params.each do |k, v| %>
-    <%= k %> = <%= v %>
+  type = <%= @new_resource.type %>
+  <% if @new_resource.source %>
+    <% [@new_resource.source].flatten.each do |source| %>
+  source = <%= source %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.docinfo %>
+  docinfo = <%= @new_resource.docinfo %>
+  <% end %>
+  <% if @new_resource.rt_mem_limit %>
+  rt_mem_limit = <%= @new_resource.rt_mem_limit %>
+  <% end %>
+  <% if @new_resource.rt_field %>
+    <% [@new_resource.rt_field].flatten.each do |field| %>
+  rt_field = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_uint %>
+    <% [@new_resource.rt_attr_uint].flatten.each do |field| %>
+  rt_attr_uint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_bool %>
+    <% [@new_resource.rt_attr_bool].flatten.each do |field| %>
+  rt_attr_bool = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_bigint %>
+    <% [@new_resource.rt_attr_bigint].flatten.each do |field| %>
+  rt_attr_bigint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_float %>
+    <% [@new_resource.rt_attr_float].flatten.each do |field| %>
+  rt_attr_float = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_multi %>
+    <% [@new_resource.rt_attr_multi].flatten.each do |field| %>
+  rt_attr_multi = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_timestamp %>
+    <% [@new_resource.rt_attr_timestamp].flatten.each do |field| %>
+  rt_attr_timestamp = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_string %>
+    <% [@new_resource.rt_attr_string].flatten.each do |field| %>
+  rt_attr_string = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.rt_attr_json %>
+    <% [@new_resource.rt_attr_json].flatten.each do |field| %>
+  rt_attr_json = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.blend_mode %>
+  blend_mode = <%= [@new_resource.blend_mode].flatten.join(', ') %>
+  <% end %>
+
+  path  = <%= @data_path %>
+  <% @new_resource.params.each do |k, v| %>
+  <%= k %> = <%= v %>
 <% end %>
+
 }
