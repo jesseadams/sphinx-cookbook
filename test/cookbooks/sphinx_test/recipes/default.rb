@@ -12,8 +12,14 @@ include_recipe "sphinx::default"
 #   notifies :restart, "service[#{node[:sphinx][:package][:daemon]}]"
 # end
 
-sphinx_index 'test_index' do
-  params 'type' => 'rt', 'workers' => 1
+# sphinx_index 'test_index' do
+#   params 'type' => 'rt', 'workers' => 1
+#   action :create
+#   notifies :restart, "service[#{node[:sphinx][:package][:daemon]}]"
+# end
+
+sphinx_index 'test_source' do
+  type 'plain'
+  blend_mode %w(trim_tail skip_pure)
   action :create
-  notifies :restart, "service[#{node[:sphinx][:package][:daemon]}]"
 end
