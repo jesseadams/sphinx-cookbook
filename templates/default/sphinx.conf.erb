@@ -52,9 +52,13 @@ EOT
 
 cat <<EOT
 indexer {
-<% @indexer.each do |k, v| %>
-    <%= k %>=<%= v %>
-<% end %>
+  mem_limit = <%= node[:sphinx][:indexer][:mem_limit] %>
+  max_iops = <%= node[:sphinx][:indexer][:max_iops] %>
+  max_iosize = <%= node[:sphinx][:indexer][:max_iosize] %>
+  max_xmlpipe2_field = <%= node[:sphinx][:indexer][:max_xmlpipe2_field] %>
+  write_buffer = <%= node[:sphinx][:indexer][:write_buffer] %>
+  max_file_field_buffer = <%= node[:sphinx][:indexer][:max_file_field_buffer] %>
+  on_file_field_error = <%= node[:sphinx][:indexer][:on_file_field_error] %>
 }
 EOT
 

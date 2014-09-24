@@ -65,9 +65,14 @@ default[:sphinx][:searchd][:ondisk_attrs_default] = 0
 default[:sphinx][:searchd][:query_log_min_msec] = 0
 
 # Indexer settings
-default[:sphinx][:indexer][:mem_limit]             = "32M"
-default[:sphinx][:indexer][:write_buffer]          = "1M"
-default[:sphinx][:indexer][:max_file_field_buffer] = "8M"
+default[:sphinx][:indexer][:mem_limit] = '128M'
+default[:sphinx][:indexer][:max_iops] = 0
+default[:sphinx][:indexer][:max_iosize] = 0
+default[:sphinx][:indexer][:max_xmlpipe2_field] = '2M'
+default[:sphinx][:indexer][:write_buffer] = '1M'
+default[:sphinx][:indexer][:max_file_field_buffer] = '8M'
+default[:sphinx][:indexer][:on_file_field_error] = 'ignore_field'
+default[:sphinx][:indexer][:lemmatizer_cache] = '256K'
 
 # Platform dependent settings
 case node[:platform_family]
@@ -88,4 +93,8 @@ when 'rhel'
 else
   default[:sphinx][:package][:name] = 'sphinx'
   default[:sphinx][:package][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:data_dir] = '/var/lib/sphinx'
+  default[:sphinx][:log_dir] = '/var/log/sphinx'
+  default[:sphinx][:run_dir] = '/var/run/sphinx'
+  default[:sphinx][:package][:daemon] = "searchd"
 end
