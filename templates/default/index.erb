@@ -59,10 +59,52 @@ index <%= @new_resource.name %> {
   <% if @new_resource.blend_mode %>
   blend_mode = <%= [@new_resource.blend_mode].flatten.join(', ') %>
   <% end %>
-
+  <% if @new_resource.morphology %>
+  morphology = <%= [@new_resource.morphology].flatten.join(', ') %>
+  <% end %>
+  <% if @new_resource.min_word_len %>
+  min_word_len = <%= @new_resource.min_word_len %>
+  <% end %>
+  <% if @new_resource.min_prefix_len %>
+  min_prefix_len = <%= @new_resource.min_prefix_len %>
+  <% end %>
+  <% if @new_resource.index_exact_words %>
+  index_exact_words = <%= @new_resource.index_exact_words %>
+  <% end %>
+  <% if @new_resource.expand_keywords %>
+  expand_keywords = <%= @new_resource.expand_keywords %>
+  <% end %>
+  <% if @new_resource.html_strip %>
+  html_strip = 1
+  <% end %>
+  <% if @new_resource.html_remove_elements %>
+  html_remove_elements = <%= [@new_resource.html_remove_elements].flatten.join(', ') %>
+  <% end %>
+  <% if @new_resource.wordforms %>
+  wordforms = <%= @new_resource.wordforms %>
+  <% end %>
+  <% if @new_resource.stopwords %>
+    <% [@new_resource.stopwords].flatten.each do |field| %>
+  stopwords = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.stopword_step %>
+  stopword_step = <%= @new_resource.stopword_step %>
+  <% end %>
+  <% if @new_resource.blend_chars %>
+  blend_chars = <%= [@new_resource.blend_chars].flatten.join(', ') %>
+  <% end %>
+  <% if @new_resource.charset_table %>
+  charset_table = <%= @new_resource.charset_table.join(', ') %>
+  <% end %>
+  <% if @new_resource.ngram_len %>
+  ngram_len = <%= @new_resource.ngram_len %>
+  <% end %>
+  <% if @new_resource.ngram_chars %>
+  ngram_chars = <%= @new_resource.ngram_chars.join(', ') %>
+  <% end %>
   path  = <%= @data_path %>
   <% @new_resource.params.each do |k, v| %>
   <%= k %> = <%= v %>
 <% end %>
-
 }

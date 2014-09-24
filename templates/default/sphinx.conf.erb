@@ -11,16 +11,42 @@ shopt -s nullglob
 
 cat <<EOT
 searchd {
-<% @searchd.each do |k, v| %>
-  <% if v.respond_to?("each") %>
-    <% v.each do |sub_v| %>
-      <%= k %> = <%= sub_v %>
-    <% end %>
-  <% else %>
-    <%= k %>=<%= v %>
+  <% node[:sphinx][:searchd][:listen].each do |listen| %>
+  listen = <%= listen %>
   <% end %>
-
-<% end %>
+  log = <%= node[:sphinx][:log_dir] %>/searchd.log
+  query_log = <%= node[:sphinx][:log_dir] %>/query.log
+  pid_file = <%= node[:sphinx][:run_dir] %>/searchd.pid
+  read_timeout = <%= node[:sphinx][:searchd][:read_timeout] %>
+  client_timeout = <%= node[:sphinx][:searchd][:client_timeout] %>
+  max_children = <%= node[:sphinx][:searchd][:max_children] %>
+  max_matches = <%= node[:sphinx][:searchd][:max_matches] %>
+  query_log_format = <%= node[:sphinx][:searchd][:query_log_format] %>
+  rt_flush_period = <%= node[:sphinx][:searchd][:rt_flush_period] %>
+  seamless_rotate = <%= node[:sphinx][:searchd][:seamless_rotate] %>
+  preopen_indexes = <%= node[:sphinx][:searchd][:preopen_indexes] %>
+  unlink_old = <%= node[:sphinx][:searchd][:unlink_old] %>
+  attr_flush_period = <%= node[:sphinx][:searchd][:attr_flush_period] %>
+  max_packet_size = <%= node[:sphinx][:searchd][:max_packet_size] %>
+  mva_updates_pool = <%= node[:sphinx][:searchd][:mva_updates_pool] %>
+  max_filters = <%= node[:sphinx][:searchd][:max_filters] %>
+  max_filter_values = <%= node[:sphinx][:searchd][:max_filter_values] %>
+  listen_backlog = <%= node[:sphinx][:searchd][:listen_backlog] %>
+  read_buffer = <%= node[:sphinx][:searchd][:read_buffer] %>
+  read_unhinted = <%= node[:sphinx][:searchd][:read_unhinted] %>
+  max_batch_queries = <%= node[:sphinx][:searchd][:max_batch_queries] %>
+  subtree_docs_cache = <%= node[:sphinx][:searchd][:subtree_docs_cache] %>
+  subtree_hits_cache = <%= node[:sphinx][:searchd][:subtree_hits_cache] %>
+  workers = <%= node[:sphinx][:searchd][:workers] %>
+  dist_threads = <%= node[:sphinx][:searchd][:dist_threads] %>
+  binlog_flush = <%= node[:sphinx][:searchd][:binlog_flush] %>
+  binlog_max_log_size = <%= node[:sphinx][:searchd][:binlog_max_log_size] %>
+  collation_server = <%= node[:sphinx][:searchd][:collation_server] %>
+  collation_libc_locale = <%= node[:sphinx][:searchd][:collation_libc_locale] %>
+  thread_stack = <%= node[:sphinx][:searchd][:thread_stack] %>
+  expansion_limit = <%= node[:sphinx][:searchd][:expansion_limit] %>
+  watchdog = <%= node[:sphinx][:searchd][:watchdog] %>
+  binlog_path = <%= node[:sphinx][:data_dir] %>
 }
 EOT
 

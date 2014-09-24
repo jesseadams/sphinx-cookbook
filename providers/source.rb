@@ -10,7 +10,7 @@ action :create do
     data_path = "#{node[:sphinx][:install_path]}/data/#{new_resource.name}_index"
   else
     conf_path = "#{node[:sphinx][:package][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
-    data_path = "#{node[:sphinx][:package][:data_dir]}/#{new_resource.name}_index"
+    data_path = "#{node[:sphinx][:data_dir]}/#{new_resource.name}_index"
   end
 
   template conf_path do

@@ -31,8 +31,38 @@ default[:sphinx][:package][:yum_repo] = 'yum-epel' # yum recipe or nil
 # Search daemon settings
 default[:sphinx][:searchd][:listen]       = ["0.0.0.0:9312"]
 default[:sphinx][:searchd][:read_timeout] = 5
-default[:sphinx][:searchd][:max_children] = 30
+default[:sphinx][:searchd][:client_timeout] = 300
+default[:sphinx][:searchd][:max_children] = 0
 default[:sphinx][:searchd][:max_matches]  = 1000
+default[:sphinx][:searchd][:query_log_format] = 'plain'
+default[:sphinx][:searchd][:rt_flush_period] = 36000
+default[:sphinx][:searchd][:seamless_rotate] = 1
+default[:sphinx][:searchd][:preopen_indexes] = 1
+default[:sphinx][:searchd][:unlink_old] = 1
+default[:sphinx][:searchd][:attr_flush_period] = 0
+default[:sphinx][:searchd][:max_packet_size] = '32M'
+default[:sphinx][:searchd][:mva_updates_pool] = '1M'
+default[:sphinx][:searchd][:max_filters] = 256
+default[:sphinx][:searchd][:max_filter_values] = 4096
+default[:sphinx][:searchd][:listen_backlog] = 5
+default[:sphinx][:searchd][:read_buffer] = '256K'
+default[:sphinx][:searchd][:read_unhinted] = '32K'
+default[:sphinx][:searchd][:max_batch_queries] = 32
+default[:sphinx][:searchd][:subtree_docs_cache] = 0
+default[:sphinx][:searchd][:subtree_hits_cache] = 0
+default[:sphinx][:searchd][:workers] = 'threads'
+default[:sphinx][:searchd][:dist_threads] = 0
+default[:sphinx][:searchd][:binlog_flush] = 2
+default[:sphinx][:searchd][:binlog_max_log_size] = 0
+default[:sphinx][:searchd][:collation_server] = 'libc_ci'
+default[:sphinx][:searchd][:collation_libc_locale] = 'C'
+default[:sphinx][:searchd][:rt_flush_period] = 36000
+default[:sphinx][:searchd][:thread_stack] = '1M'
+default[:sphinx][:searchd][:expansion_limit] = 0
+default[:sphinx][:searchd][:watchdog] = 1
+default[:sphinx][:searchd][:shutdown_timeout] = 3
+default[:sphinx][:searchd][:ondisk_attrs_default] = 0
+default[:sphinx][:searchd][:query_log_min_msec] = 0
 
 # Indexer settings
 default[:sphinx][:indexer][:mem_limit]             = "32M"
@@ -44,20 +74,16 @@ case node[:platform_family]
 when 'debian'
   default[:sphinx][:package][:name] = 'sphinxsearch'
   default[:sphinx][:package][:conf_path] = '/etc/sphinxsearch'
-  default[:sphinx][:package][:data_dir] = '/var/lib/sphinxsearch/data'
-  default[:sphinx][:package][:log_dir] = '/var/log/sphinxsearch'
-  default[:sphinx][:searchd][:log] = "/var/log/sphinxsearch/sphinx.log"
-  default[:sphinx][:searchd][:query_log] = "/var/log/sphinxsearch/query.log"
-  default[:sphinx][:searchd][:pid_file] = "/var/run/sphinxsearch/searchd.pid"
+  default[:sphinx][:data_dir] = '/var/lib/sphinxsearch/data'
+  default[:sphinx][:log_dir] = '/var/log/sphinxsearch'
+  default[:sphinx][:run_dir] = '/var/run/sphinxsearch'
   default[:sphinx][:package][:daemon] = "sphinxsearch"
 when 'rhel'
   default[:sphinx][:package][:name] = 'sphinx'
   default[:sphinx][:package][:conf_path] = '/etc/sphinx'
-  default[:sphinx][:package][:data_dir] = '/var/lib/sphinx'
-  default[:sphinx][:package][:log_dir] = '/var/log/sphinx'
-  default[:sphinx][:searchd][:log] = "/var/log/sphinx/sphinx.log"
-  default[:sphinx][:searchd][:query_log] = "/var/log/sphinx/query.log"
-  default[:sphinx][:searchd][:pid_file] = "/var/run/sphinx/searchd.pid"
+  default[:sphinx][:data_dir] = '/var/lib/sphinx'
+  default[:sphinx][:log_dir] = '/var/log/sphinx'
+  default[:sphinx][:run_dir] = '/var/run/sphinx'
   default[:sphinx][:package][:daemon] = "searchd"
 else
   default[:sphinx][:package][:name] = 'sphinx'
