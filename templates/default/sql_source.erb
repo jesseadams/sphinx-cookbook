@@ -1,0 +1,111 @@
+source <%= @new_resource.name %> {
+  type = <%= @new_resource.type %>
+  sql_host = <%= @new_resource.sql_host %>
+  <% if @new_resource.sql_port %>
+  sql_port = <%= @new_resource.sql_port %>
+  <% end %>
+  <% if @new_resource.sql_user %>
+  sql_user = <%= @new_resource.sql_user %>
+  <% end %>
+  <% if @new_resource.sql_pass %>
+  sql_pass = <%= @new_resource.sql_pass %>
+  <% end %>
+  <% if @new_resource.sql_db %>
+  sql_db = <%= @new_resource.sql_db %>
+  <% end %>
+  <% if @new_resource.sql_sock %>
+  sql_sock = <%= @new_resource.sql_sock %>
+  <% end %>
+  <% if @new_resource.mysql_connect_flags %>
+  mysql_connect_flags = <%= @new_resource.mysql_connect_flags %>
+  <% end %>
+  <% if @new_resource.mysql_ssl_cert %>
+  mysql_ssl_cert = <%= @new_resource.mysql_ssl_cert %>
+  <% end %>
+  <% if @new_resource.mysql_ssl_key %>
+  mysql_ssl_key = <%= @new_resource.mysql_ssl_key %>
+  <% end %>
+  <% if @new_resource.mysql_ssl_ca %>
+  mysql_ssl_ca = <%= @new_resource.mysql_ssl_ca %>
+  <% end %>
+  <% if @new_resource.sql_query_pre %>
+    <% [@new_resource.sql_query_pre].flatten.each do |query| %>
+  sql_query_pre = <%= query %>
+    <% end %>
+  <% end %>
+  sql_query = <%= @new_resource.sql_query %>
+  <% if @new_resource.sql_joined_field %>
+    <% [@new_resource.sql_joined_field].flatten.each do |field| %>
+   sql_joined_field = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_query_range %>
+  sql_query_range = <%= @new_resource.sql_query_range %>
+  <% end %>
+  <% if @new_resource.sql_range_step %>
+  sql_range_step = <%= @new_resource.sql_range_step %>
+  <% end %>
+  <% if @new_resource.sql_query_killlist %>
+  sql_query_killlist = <%= @new_resource.sql_query_killlist %>
+  <% end %>
+  <% if @new_resource.sql_attr_uint %>
+    <% [@new_resource.sql_attr_uint].flatten.each do |field| %>
+  sql_attr_uint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_bool %>
+    <% [@new_resource.sql_attr_bool].flatten.each do |field| %>
+  sql_attr_bool = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_bigint %>
+    <% [@new_resource.sql_attr_bigint].flatten.each do |field| %>
+  sql_attr_bigint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_float %>
+    <% [@new_resource.sql_attr_float].flatten.each do |field| %>
+  sql_attr_float = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_multi %>
+    <% [@new_resource.sql_attr_multi].flatten.each do |field| %>
+  sql_attr_multi = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_timestamp %>
+    <% [@new_resource.sql_attr_timestamp].flatten.each do |field| %>
+  sql_attr_timestamp = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_string %>
+    <% [@new_resource.sql_attr_string].flatten.each do |field| %>
+  sql_attr_string = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_attr_json %>
+    <% [@new_resource.sql_attr_json].flatten.each do |field| %>
+  sql_attr_json = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_field_string %>
+    <% [@new_resource.sql_field_string].flatten.each do |field| %>
+  sql_field_string = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.sql_file_field %>
+  sql_file_field = <%= @new_resource.sql_file_field %>
+  <% end %>
+  <% if @new_resource.sql_query_post %>
+  sql_query_post = <%= @new_resource.sql_query_post %>
+  <% end %>
+  <% if @new_resource.sql_query_post_index %>
+  sql_query_post_index = <%= @new_resource.sql_query_post_index %>
+  <% end %>
+  <% if @new_resource.sql_ranged_throttle %>
+  sql_ranged_throttle = <%= @new_resource.sql_ranged_throttle %>
+  <% end %>
+  <%if @new_resource.mssql_winauth %>
+  mssql_winauth = 1
+  <% end %>
+}
