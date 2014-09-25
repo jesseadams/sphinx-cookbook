@@ -29,3 +29,9 @@ sphinx_index 'rt_index' do
   blend_mode %w(trim_tail skip_pure)
   action :create
 end
+
+sphinx_sql_source 'sql_source' do
+  type 'mysql'
+  sql_host 'localhost'
+  sql_query 'select * from test;'
+end

@@ -1,0 +1,57 @@
+source <%= @new_resource.name %> {
+  type = <%= @new_resource.type %>
+  xmlpipe_command = <%= @new_resource.xmlpipe_command %>
+  <% if @new_resource.xmlpipe_field_string %>
+    <% [@new_resource.xmlpipe_field_string].flatten.each do |field| %>
+  xmlpipe_field_string = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_field %>
+    <% [@new_resource.xmlpipe_field].flatten.each do |field| %>
+  xmlpipe_field = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_uint %>
+    <% [@new_resource.xmlpipe_attr_uint].flatten.each do |field| %>
+  xmlpipe_attr_uint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_bool %>
+    <% [@new_resource.xmlpipe_attr_bool].flatten.each do |field| %>
+  xmlpipe_attr_bool = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_bigint %>
+    <% [@new_resource.xmlpipe_attr_bigint].flatten.each do |field| %>
+  xmlpipe_attr_bigint = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_float %>
+    <% [@new_resource.xmlpipe_attr_float].flatten.each do |field| %>
+  xmlpipe_attr_float = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_multi %>
+    <% [@new_resource.xmlpipe_attr_multi].flatten.each do |field| %>
+  xmlpipe_attr_multi = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_timestamp %>
+    <% [@new_resource.xmlpipe_attr_timestamp].flatten.each do |field| %>
+  xmlpipe_attr_timestamp = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_string %>
+    <% [@new_resource.xmlpipe_attr_string].flatten.each do |field| %>
+  xmlpipe_attr_string = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_attr_json %>
+    <% [@new_resource.xmlpipe_attr_json].flatten.each do |field| %>
+  xmlpipe_attr_json = <%= field %>
+    <% end %>
+  <% end %>
+  <% if @new_resource.xmlpipe_fixup_utf8 %>
+  xmlpipe_fixup_utf8 = 1
+  <% end %>
+}
