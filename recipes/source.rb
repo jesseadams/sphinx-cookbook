@@ -8,22 +8,6 @@ directory node[:sphinx][:source][:install_path] do
   recursive true
 end
 
-template "#{node[:sphinx][:source][:install_path]}/sphinx.conf" do
-  source "sphinx.conf.erb"
-  owner node[:sphinx][:user]
-  group node[:sphinx][:group]
-  mode '0644'
-  variables :install_path => node[:sphinx][:source][:install_path],
-            :searchd => node[:sphinx][:searchd],
-            :indexer => node[:sphinx][:indexer]
-end
-
-directory "#{node[:sphinx][:source][:install_path]}/conf.d" do
-  owner node[:sphinx][:user]
-  group node[:sphinx][:group]
-  mode '0755'
-end
-
 # Install required dependency when building from source
 # against Percona server
 if node[:sphinx][:use_percona]
@@ -36,6 +20,23 @@ if node[:sphinx][:use_percona]
 end
 
 include_recipe "sphinx::_source_from_#{node[:sphinx][:source][:retrieve_method]}"
+
+template "#{node[:sphinx][:source][:install_path]}/etc/sphinx.conf" do
+  source "sphinx.conf.erb"
+  owner node[:sphinx][:user]
+  group node[:sphinx][:group]
+  mode '0644'
+  variables :install_path => node[:sphinx][:source][:install_path],
+            :searchd => node[:sphinx][:searchd],
+            :indexer => node[:sphinx][:indexer]
+end
+
+directory "#{node[:sphinx][:source][:install_path]}/etc/conf.d" do
+  owner node[:sphinx][:user]
+  group node[:sphinx][:group]
+  mode '0755'
+  recursive true
+end
 
 if node[:sphinx][:use_stemmer]
   remote_file File.join(cache_path, "libstemmer_c.tgz") do

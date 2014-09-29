@@ -8,7 +8,7 @@ action :create do
   if node[:sphinx][:install_method] == 'source'
     conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_source.txt"
   else
-    conf_path = "#{node[:sphinx][:package][:conf_path]}/conf.d/#{new_resource.name}_source.txt"
+    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_source.txt"
   end
 
   template conf_path do
@@ -25,7 +25,7 @@ action :delete do
   if node[:sphinx][:install_method] == 'source'
     conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_index.txt"
   else
-    conf_path = "#{node[:sphinx][:package][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
   end
 
   file conf_path do

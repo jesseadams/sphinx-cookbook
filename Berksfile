@@ -3,6 +3,5 @@ site :opscode
 metadata
 
 group :integration do
-  cookbook 'minitest-handler', github: 'btm/minitest-handler-cookbook'
-  cookbook 'sphinx_test', :path => './test/cookbooks/sphinx_test'
+  cookbook 'sphinx_test', :path => './test/fixtures/sphinx_test'
 end

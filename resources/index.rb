@@ -40,8 +40,6 @@ attribute :charset_table, :kind_of => Array
 attribute :ngram_len, :equal_to => [0, 1]
 attribute :ngram_chars, :kind_of => Array
 
-attribute :params, :kind_of => Hash, :required => true, :default => {}
-
 
 private
 

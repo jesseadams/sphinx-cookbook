@@ -13,7 +13,7 @@ default[:sphinx][:source][:retrieve_method]       = 'http' # http or svn
 default[:sphinx][:source][:url]                   = nil
 default[:sphinx][:source][:base_url]              = "http://sphinxsearch.com/files"
 default[:sphinx][:source][:stemmer_url]           = "http://snowball.tartarus.org/dist/libstemmer_c.tgz"
-default[:sphinx][:source][:install_path]          = "/usr/local"
+default[:sphinx][:source][:install_path]          = "/opt/sphinx"
 default[:sphinx][:source][:binary_path]           = "#{sphinx[:source][:install_path]}/bin"
 default[:sphinx][:source][:configure_flags]       = []
 default[:sphinx][:source][:extra_configure_flags] = []
@@ -78,21 +78,21 @@ default[:sphinx][:indexer][:lemmatizer_cache] = '256K'
 case node[:platform_family]
 when 'debian'
   default[:sphinx][:package][:name] = 'sphinxsearch'
-  default[:sphinx][:package][:conf_path] = '/etc/sphinxsearch'
+  default[:sphinx][:conf_path] = '/etc/sphinxsearch'
   default[:sphinx][:data_dir] = '/var/lib/sphinxsearch/data'
   default[:sphinx][:log_dir] = '/var/log/sphinxsearch'
   default[:sphinx][:run_dir] = '/var/run/sphinxsearch'
   default[:sphinx][:package][:daemon] = "sphinxsearch"
 when 'rhel'
   default[:sphinx][:package][:name] = 'sphinx'
-  default[:sphinx][:package][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:conf_path] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
   default[:sphinx][:package][:daemon] = "searchd"
 else
   default[:sphinx][:package][:name] = 'sphinx'
-  default[:sphinx][:package][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:conf_path] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
