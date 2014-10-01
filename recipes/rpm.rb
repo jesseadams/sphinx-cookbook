@@ -19,30 +19,4 @@ rpm_package sphinx_rpm do
   action :install
 end
 
-# create direcotry for providers
-directory '/etc/sphinx/conf.d/' do
-  owner 'root'
-  group 'root'
-  mode 0755
-  action :create
-end
-
-# create direcotry for index
-directory '/etc/sphinx/data/' do
-  owner 'root'
-  group 'root'
-  mode 0755
-  action :create
-end
-
-template '/etc/sphinx/sphinx.conf' do
-  source 'sphinx.conf.erb'
-  owner node[:sphinx][:user]
-  group node[:sphinx][:group]
-  mode '0644'
-  variables(
-    :install_path => node[:sphinx][:rpm][:conf_path],
-    :searchd => node[:sphinx][:searchd],
-    :indexer => node[:sphinx][:indexer]
-  )
-end
+include_recipe "sphinx::_configure"

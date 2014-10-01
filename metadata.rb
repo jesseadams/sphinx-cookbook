@@ -16,6 +16,7 @@ provides         "sphinx::source"
 provides         "sphinx::rpm"
 
 depends          "build-essential", ">= 1.1.2"
+depends         "ark"
 depends          "mysql"
 depends          "percona"
 depends          "postgresql", ">= 1.0.0"

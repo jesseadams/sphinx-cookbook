@@ -5,20 +5,15 @@ end
 use_inline_resources if defined?(use_inline_resources)
 
 action :create do
-  if node[:sphinx][:install_method] == 'source'
-    conf_path = "#{node[:sphinx][:source][:install_path]}/conf.d/#{new_resource.name}_index.txt"
-    data_path = "#{node[:sphinx][:source][:install_path]}/data/#{new_resource.name}_index"
-  else
-    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
-    data_path = "#{node[:sphinx][:data_dir]}/#{new_resource.name}_index"
-  end
+  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+  data_path = "#{node[:sphinx][:data_dir]}/#{new_resource.name}_index"
 
   sphinx_reindex new_resource.name do
     action :nothing
   end
 
   service "sphinx" do
-    service_name node[:sphinx][:package][:daemon]
+    service_name node[:sphinx][:daemon]
     supports :status => true, :restart => true, :reload => true
     action [ :nothing ]
   end
@@ -40,11 +35,7 @@ action :create do
 end
 
 action :delete do
-  if node[:sphinx][:install_method] == 'source'
-    conf_path = "#{node[:sphinx][:source][:install_path]}/conf.d/#{new_resource.name}_index.txt"
-  else
-    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
-  end
+  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
 
   file conf_path do
     action :delete

@@ -22,11 +22,7 @@ action :create do
 end
 
 action :delete do
-  if node[:sphinx][:install_method] == 'source'
-    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_index.txt"
-  else
-    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
-  end
+  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
 
   file conf_path do
     action :delete

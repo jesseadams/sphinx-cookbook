@@ -70,3 +70,7 @@ sphinx_index 'sql_index' do
   type 'plain'
   source 'sql_source'
 end
+
+sphinx_reindex 'sql_index' do
+  rotate true
+end

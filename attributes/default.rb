@@ -5,16 +5,12 @@ default[:sphinx][:user]           = 'root'
 default[:sphinx][:group]          = 'root'
 default[:sphinx][:use_stemmer]    = false
 default[:sphinx][:use_mysql]      = false
-default[:sphinx][:use_percona]    = false
 default[:sphinx][:use_postgres]   = false
 
 # Source Installation Settings
 default[:sphinx][:source][:retrieve_method]       = 'http' # http or svn
-default[:sphinx][:source][:url]                   = nil
-default[:sphinx][:source][:base_url]              = "http://sphinxsearch.com/files"
-default[:sphinx][:source][:stemmer_url]           = "http://snowball.tartarus.org/dist/libstemmer_c.tgz"
+default[:sphinx][:source][:source_url] = "http://sphinxsearch.com/files/sphinx-2.2.4-release.tar.gz"
 default[:sphinx][:source][:install_path]          = "/opt/sphinx"
-default[:sphinx][:source][:binary_path]           = "#{sphinx[:source][:install_path]}/bin"
 default[:sphinx][:source][:configure_flags]       = []
 default[:sphinx][:source][:extra_configure_flags] = []
 default[:sphinx][:source][:branch]                = 'trunk'
@@ -82,19 +78,29 @@ when 'debian'
   default[:sphinx][:data_dir] = '/var/lib/sphinxsearch/data'
   default[:sphinx][:log_dir] = '/var/log/sphinxsearch'
   default[:sphinx][:run_dir] = '/var/run/sphinxsearch'
-  default[:sphinx][:package][:daemon] = "sphinxsearch"
+  default[:sphinx][:daemon] = 'sphinxsearch'
+  default[:sphinx][:user] = 'sphinxsearch'
 when 'rhel'
   default[:sphinx][:package][:name] = 'sphinx'
   default[:sphinx][:conf_path] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
-  default[:sphinx][:package][:daemon] = "searchd"
+  default[:sphinx][:daemon] = 'searchd'
+  default[:sphinx][:user] = 'sphinx'
 else
   default[:sphinx][:package][:name] = 'sphinx'
   default[:sphinx][:conf_path] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
-  default[:sphinx][:package][:daemon] = "searchd"
+  default[:sphinx][:daemon] = "searchd"
+  default[:sphinx][:user] = 'sphinx'
+end
+
+if node[:sphinx][:install_method] == 'source'
+  default[:sphinx][:conf_path] = "%{install_path}/etc" % {install_path: node[:sphinx][:source][:install_path]}
+  default[:sphinx][:data_dir] = "%{install_path}/var/data" % {install_path: node[:sphinx][:source][:install_path]}
+  default[:sphinx][:log_dir] = "%{install_path}/var/log" % {install_path: node[:sphinx][:source][:install_path]}
+  default[:sphinx][:run_dir] = "%{install_path}/run" % {install_path: node[:sphinx][:source][:install_path]}
 end
