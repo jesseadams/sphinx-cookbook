@@ -18,15 +18,15 @@
 ### END INIT INFO
 
 
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:<%= node[:sphinx][:source][:install_path] %>
 DAEMON=<%= node[:sphinx][:source][:install_path] %>/bin/searchd
 NAME=sphinxsearch
 DESC=sphinxsearch
 
 test -x $DAEMON || exit 0
 
-LOGDIR=/var/log/sphinxsearch
-PIDFILE=/var/run/sphinxsearch/searchd.pid
+LOGDIR=<%= node[:sphinx][:log_dir] %>
+PIDFILE=<%= node[:sphinx][:run_dir] %>/searchd.pid
 DODTIME=1                   # Time to wait for the server to die, in seconds
                             # If this value is set too low you might not
                             # let some servers to die gracefully and
@@ -102,14 +102,6 @@ do_force_stop() {
     return 0
 }
 do_start() {
-        # Check if we have the configuration file
-        if [ ! -f /etc/sphinxsearch/sphinx.conf ]; then
-            echo "\n"
-            echo "Please create an /etc/sphinxsearch/sphinx.conf configuration file."
-            echo "A template is provided as /etc/sphinxsearch/sphinx.conf.sample."
-            exit 1
-        fi
-
         start-stop-daemon --start --pidfile $PIDFILE --chuid sphinxsearch --exec ${DAEMON}
 }
 do_stop() {
