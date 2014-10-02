@@ -27,8 +27,7 @@ end
 tar_package node[:sphinx][:source][:source_url] do
   prefix node[:sphinx][:source][:install_path]
   creates "#{node[:sphinx][:source][:install_path]}/bin/searchd"
-  configure_flags [node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
-                  node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
+  configure_flags [node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
                   node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql']
 end
 

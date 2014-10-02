@@ -3,7 +3,6 @@ default[:sphinx][:install_method] = 'source' # rpm, source or package
 default[:sphinx][:version]        = nil
 default[:sphinx][:user]           = 'root'
 default[:sphinx][:group]          = 'root'
-default[:sphinx][:use_stemmer]    = false
 default[:sphinx][:use_mysql]      = false
 default[:sphinx][:use_postgres]   = false
 
