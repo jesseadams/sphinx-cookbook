@@ -1,12 +1,59 @@
+Sphinx cookbook
+===
+
 [![Travis CI](https://travis-ci.org/jesseadams/sphinx-cookbook.png)](https://travis-ci.org/jesseadams/sphinx-cookbook)
 
-## Description
+Description
+---
 
-Installs and configures Sphinx search (searchd). Installation can by from source (http or svn)  or package.
+Installs and configures Sphinx search (searchd). Installation can by from source (http or svn)  or package. Also it contains lwrp for creating index sources and indexes.
 
-## Attributes
+Requirements
+---
+### Cookbooks
+- build-essential
+- mysql
+- postgresql
+- yum
+- yum-epel
+- apt
+- tar
+
+### Platforms
+The following platforms are supported and tested under test kitchen:
+
+- CentOS 6.5
+- Ubutu 14.04
+
+Also it should work on RedHat 6 and Debian 7.
+
+Attributes
+---
 
 Thanks to several contributions this cookbook has a lot of flexibility. See attributes/default.rb for a full list of attributes and capabilities.
+
+Recipes
+---
+- default.rb - Installs sphinx
+- package.rb - Installs sphinx from a package
+- source.rb - Installs sphinx from source
+- rpm.rb - Installs sphinx from rpm
+
+LWRP
+---
+- sphinx_sql_source - creates source for sphinx index, which allows index sql databases.
+- sphinx_pipe_source - creates source for sphinx index, which get data from pipe command.
+- sphinx_index - creates index.
+- sphinx_reindex - allows reindex index. It takes following parameters:
+    - name - sphinx index name. Name attribute.
+    - rotate -  should reindex send HUP to searchd or not. Default: true.
+
+Source and index LWRP have attributes that match with sphinx configuration parameters. For details see resource definition files.
+If your version of sphinx has parameter, what is not in the lwrp attributes, you have  two way:
+
+- Add it to lwrp and make pull-request
+- Create you own template in node[:sphinx][:conf_path]/conf.d directory and reindex index.
+
 
 ## Usage Examples
 
@@ -29,7 +76,9 @@ default_attributes({
   'sphinx' => {
     'use_mysql'   => true,
     'install_method' => 'source',
-    'version' => '2.0.8'
+    'source' => {
+    	'source_url' => 'http://sphinxsearch.com/files/sphinx-2.2.4-release.tar.gz'
+    }
   }
 })
 
@@ -89,6 +138,8 @@ default_attributes({
 # Attributes applied no matter what the node has set already.
 #override_attributes()
 ```
+
+Recipes only install searchd daemon and enable it. searchd didn't work if in it's config missing information about indexes. So you must create indexes via lwrp in your wrapper cookbook.
 
 ## History
 
