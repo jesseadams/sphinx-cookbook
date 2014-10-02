@@ -8,9 +8,10 @@ default[:sphinx][:use_mysql]      = false
 default[:sphinx][:use_postgres]   = false
 
 # Source Installation Settings
-default[:sphinx][:source][:retrieve_method]       = 'http' # http or svn
+default[:sphinx][:source][:retrieve_method] = 'http' # http or svn
 default[:sphinx][:source][:source_url] = "http://sphinxsearch.com/files/sphinx-2.2.4-release.tar.gz"
-default[:sphinx][:source][:install_path]          = "/opt/sphinx"
+default[:sphinx][:source][:url] = "http://sphinxsearch.googlecode.com/svn"
+default[:sphinx][:source][:install_path] = "/opt/sphinx"
 default[:sphinx][:source][:configure_flags]       = []
 default[:sphinx][:source][:extra_configure_flags] = []
 default[:sphinx][:source][:branch]                = 'trunk'

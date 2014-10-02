@@ -1,15 +1,35 @@
 include_recipe "build-essential"
 
 
-ark "sphinx" do
-  url  node[:sphinx][:source][:source_url]
-  version /[0-9]+.[0-9]+.[0-9]+/.match(node[:sphinx][:source][:source_url]).to_s
-  autoconf_opts ["--exec-prefix=#{node[:sphinx][:source][:install_path]}",
-                "--prefix=#{node[:sphinx][:source][:install_path]}",
-                node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
-                node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
-                node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql']
-  action :install_with_make
+if node[:sphinx][:source][:retrieve_method] == "svn"
+  package "subversion" do
+    action :install
+  end
+  
+  subversion "sphinx" do
+    repository "#{node[:sphinx][:source][:url]}/#{node[:sphinx][:source][:branch]}"
+    revision node[:sphinx][:source][:revision]
+    destination File.join(Chef::Config[:file_cache_path], 'sphinx')
+    action :sync
+    not_if { ::File.exist?(File.join(Chef::Config[:file_cache_path], 'sphinx')) }
+  end
+
+  execute "creates tar.gz" do
+    cwd Chef::Config[:file_cache_path]
+    command "tar czf #{File.join(Chef::Config[:file_cache_path], 'sphinx.tar.gz')} sphinx"
+    creates File.join(Chef::Config[:file_cache_path], 'sphinx.tar.gz')
+    action :run
+  end
+
+  node.set[:sphinx][:source][:source_url] = "file://#{File.join(Chef::Config[:file_cache_path], 'sphinx.tar.gz')}"
+end
+
+tar_package node[:sphinx][:source][:source_url] do
+  prefix node[:sphinx][:source][:install_path]
+  creates "#{node[:sphinx][:source][:install_path]}/bin/searchd"
+  configure_flags [node[:sphinx][:use_stemmer] ? '--with-libstemmer' : '--without-libstemmer',
+                  node[:sphinx][:use_mysql] ? '--with-mysql' : '--without-mysql',
+                  node[:sphinx][:use_postgres] ? '--with-pgsql' : '--without-pgsql']
 end
 
 template "/etc/init.d/#{node[:sphinx][:daemon]}" do
