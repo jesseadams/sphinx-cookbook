@@ -43,8 +43,8 @@ describe 'sphinx::default' do
           end
 
           it 'should create a sphinx config with the appropriate install_path' do
-            regex = /Put files to be included in \/usr\/local\/conf.d/
-            expect(chef_run).to render_file('/usr/local/sphinx.conf').with_content(regex)
+            regex = /Put files to be included in \/opt\/sphinx\/etc/
+            expect(chef_run).to render_file('/opt/sphinx/etc/sphinx.conf').with_content(regex)
           end
         end
       end
