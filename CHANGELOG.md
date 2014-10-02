@@ -1,3 +1,15 @@
+2.0.0
+
+* Refactoring source.rb recipe:
+	* Commands execution replaced by tar cookbook, what allows you to do "configure/make/make install" actions under tar.gz archives.
+	* Archive with tar.gz downloads from link what stored in node[:sphinx][:source][:source_url] parameter now.
+	* Init scripts added.
+	* Compiled daemon stored in /opt/sphinx by default now.
+* package.rb recipe fixed.
+* Configuration unification.
+* LWRP to add sources and indexes.
+* Minitest replaced by serverspec. 
+
 1.1.0
 
 * Tons of housekeeping from (thanks [@devx](https://github.com/devx))
