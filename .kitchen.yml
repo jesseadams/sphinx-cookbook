@@ -3,44 +3,49 @@ driver_plugin: vagrant
 driver_config:
   require_chef_omnibus: true
 
-platforms:
-- name: ubuntu-12.04
-  driver_config:
-    box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
-  run_list:
-  - recipe[sphinx::test_prep]
-  - recipe[sphinx]
+provisioner:
+  name: chef_zero
+  data_path: test/shared
 
-- name: centos-6.4
-  driver_config:
-    box: opscode-centos-6.4
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+platforms:
+- name: ubuntu-14.04
   run_list:
-  - recipe[sphinx::test_prep]
-  - recipe[sphinx]
+    - recipe[sphinx]
+
+- name: centos-6.5
+  run_list:
+    - recipe[sphinx]
 
 suites:
 - name: source-install-http
   run_list:
-  - recipe[minitest-handler]
   - recipe[sphinx_test]
   attributes:
     sphinx:
-      version: '2.0.8'
+      use_mysql: true
+      use_postgres: true
 
 - name: source-install-svn
   run_list:
-  - recipe[minitest-handler]
   - recipe[sphinx_test]
   attributes:
     sphinx:
-      retrieve_method: 'svn'
+      use_mysql: true
+      source:
+        retrieve_method: 'svn'
 
 - name: package-install
   run_list:
-  - recipe[minitest-handler]
   - recipe[sphinx_test]
   attributes:
     sphinx:
       install_method: 'package'
+
+- name: rpm-install
+  run_list:
+  - recipe[sphinx_test]
+  attributes:
+    sphinx:
+      install_method: 'rpm'
+  excludes:
+    - ubuntu-14.04
