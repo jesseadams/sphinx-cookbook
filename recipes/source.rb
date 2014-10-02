@@ -70,25 +70,13 @@ elsif platform_family?('debian')
   end
 end
 
-directory node[:sphinx][:data_dir] do 
-  owner node[:sphinx][:user]
-  group "root"
-  mode "0755"
-  action :create
-end
-
-directory node[:sphinx][:log_dir] do
-  owner node[:sphinx][:user]
-  group "root"
-  mode "0755"
-  action :create
-end
-
-directory node[:sphinx][:run_dir] do
-  owner node[:sphinx][:user]
-  group "root"
-  mode "0755"
-  action :create
+[node[:sphinx][:data_dir], node[:sphinx][:log_dir], node[:sphinx][:run_dir]].each do |dir|
+  directory dir do
+    owner node[:sphinx][:user]
+    group "root"
+    mode "0755"
+    action :create
+  end
 end
 
 include_recipe "sphinx::_configure"

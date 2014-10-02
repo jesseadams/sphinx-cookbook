@@ -11,20 +11,17 @@ template "#{node[:sphinx][:conf_path]}/sphinx.conf" do
   group node[:sphinx][:group]
   mode '0644'
   variables(
-    :install_path => node[:sphinx][:conf_path],
-    :searchd => node[:sphinx][:searchd],
-    :indexer => node[:sphinx][:indexer]
+    :install_path => node[:sphinx][:conf_path]
   )
 end
 
-if platform_family?('debian')
-  file "/etc/default/sphinxsearch" do
-    action :create
-    owner "root"
-    group "root"
-    mode "0644"
-    content "START=yes"
-  end
+file "/etc/default/sphinxsearch" do
+  action :create
+  owner "root"
+  group "root"
+  mode "0644"
+  content "START=yes"
+  only_if { platform_family?('debian') }
 end
 
 service 'sphinx' do
