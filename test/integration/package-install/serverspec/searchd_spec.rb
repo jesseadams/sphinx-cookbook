@@ -1,11 +1,11 @@
 require_relative '../../../kitchen/data/spec_helper.rb'
 
-if os[:family] == 'RedHat'
+if os[:family] == 'redhat'
   package_name = 'sphinx'
   data_dir = '/var/lib/sphinx'
   daemon = 'searchd'
   user = 'sphinx'
-elsif ['Debian', 'Ubuntu'].include?(os[:family])
+elsif ['debian', 'ubuntu'].include?(os[:family])
   package_name = 'sphinxsearch'
   data_dir = '/var/lib/sphinxsearch/data'
   daemon = 'sphinxsearch'
