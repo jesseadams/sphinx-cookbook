@@ -5,13 +5,9 @@ end
 use_inline_resources if defined?(use_inline_resources)
 
 action :create do
-  if node[:sphinx][:install_method] == 'source'
-    conf_path = "#{node[:sphinx][:install_path]}/conf.d/#{new_resource.name}_source.txt"
-  else
-    conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_source.txt"
-  end
+  conf_dir = "#{node[:sphinx][:conf_dir]}/conf.d/#{new_resource.name}_source.txt"
 
-  template conf_path do
+  template conf_dir do
     cookbook "sphinx"
     source "pipe_source.erb"
     owner node[:sphinx][:user]
@@ -22,7 +18,7 @@ action :create do
 end
 
 action :delete do
-  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+  conf_path = "#{node[:sphinx][:conf_dir]}/conf.d/#{new_resource.name}_index.txt"
 
   file conf_path do
     action :delete

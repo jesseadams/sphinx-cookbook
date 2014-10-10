@@ -1,5 +1,9 @@
 include_recipe "build-essential"
 
+node.set[:sphinx][:conf_dir] = "#{node[:sphinx][:source][:install_path]}/etc"
+node.set[:sphinx][:log_dir] = "#{node[:sphinx][:source][:install_path]}/var/log"
+node.set[:sphinx][:run_dir] = "#{node[:sphinx][:source][:install_path]}/run"
+node.set[:sphinx][:data_dir] = "#{node[:sphinx][:source][:install_path]}/var/data"
 
 if node[:sphinx][:source][:retrieve_method] == "svn"
   package "subversion" do

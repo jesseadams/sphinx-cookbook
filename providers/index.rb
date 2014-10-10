@@ -5,7 +5,7 @@ end
 use_inline_resources if defined?(use_inline_resources)
 
 action :create do
-  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+  conf_dir = "#{node[:sphinx][:conf_dir]}/conf.d/#{new_resource.name}_index.txt"
   data_path = "#{node[:sphinx][:data_dir]}/#{new_resource.name}_index"
 
   sphinx_reindex new_resource.name do
@@ -18,7 +18,7 @@ action :create do
     action [ :nothing ]
   end
 
-  template conf_path do
+  template conf_dir do
     cookbook "sphinx"
     source "index.erb"
     owner node[:sphinx][:user]
@@ -35,7 +35,7 @@ action :create do
 end
 
 action :delete do
-  conf_path = "#{node[:sphinx][:conf_path]}/conf.d/#{new_resource.name}_index.txt"
+  conf_path = "#{node[:sphinx][:conf_dir]}/conf.d/#{new_resource.name}_index.txt"
 
   file conf_path do
     action :delete

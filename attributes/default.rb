@@ -74,7 +74,7 @@ default[:sphinx][:indexer][:lemmatizer_cache] = '256K'
 case node[:platform_family]
 when 'debian'
   default[:sphinx][:package][:name] = 'sphinxsearch'
-  default[:sphinx][:conf_path] = '/etc/sphinxsearch'
+  default[:sphinx][:conf_dir] = '/etc/sphinxsearch'
   default[:sphinx][:data_dir] = '/var/lib/sphinxsearch/data'
   default[:sphinx][:log_dir] = '/var/log/sphinxsearch'
   default[:sphinx][:run_dir] = '/var/run/sphinxsearch'
@@ -82,7 +82,7 @@ when 'debian'
   default[:sphinx][:user] = 'sphinxsearch'
 when 'rhel'
   default[:sphinx][:package][:name] = 'sphinx'
-  default[:sphinx][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:conf_dir] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
@@ -90,17 +90,10 @@ when 'rhel'
   default[:sphinx][:user] = 'sphinx'
 else
   default[:sphinx][:package][:name] = 'sphinx'
-  default[:sphinx][:conf_path] = '/etc/sphinx'
+  default[:sphinx][:conf_dir] = '/etc/sphinx'
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
   default[:sphinx][:daemon] = "searchd"
   default[:sphinx][:user] = 'sphinx'
-end
-
-if node[:sphinx][:install_method] == 'source'
-  default[:sphinx][:conf_path] = "%{install_path}/etc" % {install_path: node[:sphinx][:source][:install_path]}
-  default[:sphinx][:data_dir] = "%{install_path}/var/data" % {install_path: node[:sphinx][:source][:install_path]}
-  default[:sphinx][:log_dir] = "%{install_path}/var/log" % {install_path: node[:sphinx][:source][:install_path]}
-  default[:sphinx][:run_dir] = "%{install_path}/run" % {install_path: node[:sphinx][:source][:install_path]}
 end

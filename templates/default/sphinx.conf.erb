@@ -14,9 +14,9 @@ searchd {
   <% node[:sphinx][:searchd][:listen].each do |listen| %>
   listen = <%= listen %>
   <% end %>
-  log = <%= node[:sphinx][:log_dir] %>/searchd.log
-  query_log = <%= node[:sphinx][:log_dir] %>/query.log
-  pid_file = <%= node[:sphinx][:run_dir] %>/searchd.pid
+  log = <%= @log_dir %>/searchd.log
+  query_log = <%= @log_dir %>/query.log
+  pid_file = <%= @run_dir %>/searchd.pid
   read_timeout = <%= node[:sphinx][:searchd][:read_timeout] %>
   client_timeout = <%= node[:sphinx][:searchd][:client_timeout] %>
   max_children = <%= node[:sphinx][:searchd][:max_children] %>
@@ -46,7 +46,7 @@ searchd {
   thread_stack = <%= node[:sphinx][:searchd][:thread_stack] %>
   expansion_limit = <%= node[:sphinx][:searchd][:expansion_limit] %>
   watchdog = <%= node[:sphinx][:searchd][:watchdog] %>
-  binlog_path = <%= node[:sphinx][:data_dir] %>
+  binlog_path = <%= @data_dir %>
 }
 EOT
 
@@ -63,7 +63,7 @@ indexer {
 EOT
 
 
-for include in <%= @install_path %>/conf.d/*
+for include in <%= @conf_dir %>/conf.d/*
 do
     if [ ${include##*.} == "sh" ] ; then
         . $include
