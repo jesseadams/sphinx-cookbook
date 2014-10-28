@@ -77,6 +77,9 @@ index <%= @new_resource.name %> {
   <% if @new_resource.html_strip %>
   html_strip = 1
   <% end %>
+  <% if @new_resource.enable_star %>
+  enable_star = 1
+  <% end %>
   <% if @new_resource.html_remove_elements %>
   html_remove_elements = <%= [@new_resource.html_remove_elements].flatten.join(', ') %>
   <% end %>
@@ -92,16 +95,40 @@ index <%= @new_resource.name %> {
   stopword_step = <%= @new_resource.stopword_step %>
   <% end %>
   <% if @new_resource.blend_chars %>
-  blend_chars = <%= [@new_resource.blend_chars].flatten.join(', ') %>
+    <% str = '' %>
+    <% [@new_resource.blend_chars].flatten.each_with_index do |word, index| %>
+      <% if index % 10 != 0 %>
+        <% str += "#{word}, " %>
+      <% else %>
+        <% str += "#{word}, \\\n" %>
+      <% end %>
+    <% end %>
+  blend_chars = <%= str %>
   <% end %>
   <% if @new_resource.charset_table %>
-  charset_table = <%= @new_resource.charset_table.join(', ') %>
+    <% str = '' %>
+    <% [@new_resource.charset_table].flatten.each_with_index do |word, index| %>
+      <% if index % 10 != 0 %>
+        <% str += "#{word}, " %>
+      <% else %>
+        <% str += "#{word}, \\\n" %>
+      <% end %>
+    <% end %>
+  charset_table = <%= str %>
   <% end %>
   <% if @new_resource.ngram_len %>
   ngram_len = <%= @new_resource.ngram_len %>
   <% end %>
   <% if @new_resource.ngram_chars %>
-  ngram_chars = <%= @new_resource.ngram_chars.join(', ') %>
+    <% str = '' %>
+    <% [@new_resource.ngram_chars].flatten.each_with_index do |word, index| %>
+      <% if index % 10 != 0 %>
+        <% str += "#{word}, " %>
+      <% else %>
+        <% str += "#{word}, \\\n" %>
+      <% end %>
+    <% end %>
+  ngram_chars = <%= str %>
   <% end %>
   path  = <%= @data_path %>
   <% @new_resource.params.each do |k, v| %>

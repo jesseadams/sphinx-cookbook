@@ -39,6 +39,7 @@ attribute :blend_chars, :kind_of => [String, Array]
 attribute :charset_table, :kind_of => Array
 attribute :ngram_len, :equal_to => [0, 1]
 attribute :ngram_chars, :kind_of => Array
+attribute :enable_star, :kind_of => [TrueClass, FalseClass]
 
 
 private
