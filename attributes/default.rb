@@ -36,7 +36,6 @@ default[:sphinx][:searchd][:query_log]    = "/var/log/sphinx/query.log"
 default[:sphinx][:searchd][:pid_file]     = "/tmp/sphinx.pid"
 default[:sphinx][:searchd][:read_timeout] = 5
 default[:sphinx][:searchd][:max_children] = 30
-default[:sphinx][:searchd][:max_matches]  = 1000
 
 # Indexer settings
 default[:sphinx][:indexer][:mem_limit]             = "32M"
