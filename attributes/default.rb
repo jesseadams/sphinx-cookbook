@@ -6,6 +6,7 @@ default[:sphinx][:group]          = 'root'
 default[:sphinx][:use_stemmer]    = false
 default[:sphinx][:use_mysql]      = false
 default[:sphinx][:use_percona]    = false
+default[:sphinx][:use_mariadb]    = false
 default[:sphinx][:use_postgres]   = false
 
 # Source Installation Settings
