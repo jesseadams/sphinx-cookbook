@@ -24,9 +24,8 @@ directory "#{node[:sphinx][:source][:install_path]}/conf.d" do
   mode '0755'
 end
 
-
 # Install required dependency when building from source
-# against Percona server
+# against Percona and MariaDB servers
 if (node[:sphinx][:use_percona] or node[:sphinx][:use_mariadb])
   case node[:platform_family]
   when 'debian'
