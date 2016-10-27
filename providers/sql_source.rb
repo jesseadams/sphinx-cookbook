@@ -8,12 +8,12 @@ action :create do
   conf_dir = "#{node[:sphinx][:conf_dir]}/conf.d/#{new_resource.name}_source.txt"
 
   template conf_dir do
-    cookbook "sphinx"
-    source "sql_source.erb"
+    cookbook 'sphinx'
+    source 'sql_source.erb'
     owner node[:sphinx][:user]
     group node[:sphinx][:group]
     mode 0755
-    variables :new_resource => new_resource
+    variables new_resource: new_resource
   end
 end
 

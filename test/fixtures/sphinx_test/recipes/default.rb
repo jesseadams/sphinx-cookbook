@@ -1,4 +1,4 @@
-include_recipe "sphinx::default"
+include_recipe 'sphinx::default'
 
 # test preparation
 node.set['mysql']['server_root_password'] = 'secret'
@@ -8,7 +8,7 @@ include_recipe 'database::mysql'
 connection_info = {
   host: 'localhost',
   username: 'root',
-  password: node['mysql']['server_root_password']  
+  password: node['mysql']['server_root_password']
 }
 
 mysql_database 'sphinx_test' do
@@ -17,10 +17,10 @@ mysql_database 'sphinx_test' do
 end
 
 cookbook_file '/tmp/sphinx_test.sql' do
-  source "sphinx_test.sql"
-  owner "root"
-  group "root"
-  mode "0644"
+  source 'sphinx_test.sql'
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
 
 mysql_database 'sphinx_test' do
@@ -31,7 +31,7 @@ end
 
 mysql_database 'sphinx_test' do
   connection connection_info
-  sql { ::File.open('/tmp/sphinx_test.sql').read}
+  sql { ::File.open('/tmp/sphinx_test.sql').read }
   action :query
 end
 
@@ -47,14 +47,14 @@ sphinx_index 'rt_index' do
   morphology 'stem_enru'
   blend_mode %w(trim_tail skip_pure)
   action :create
-  notifies :restart, "service[sphinx]"
+  notifies :restart, 'service[sphinx]'
 end
 
 sphinx_sql_source 'sql_source' do
   type 'mysql'
   sql_host 'localhost'
   sql_user 'root'
-  sql_pass node['mysql']['server_root_password']  
+  sql_pass node['mysql']['server_root_password']
   sql_db 'sphinx_test'
   sql_query 'SELECT ss.salaries_id AS id, ee.emp_no AS emp_no, TO_DAYS(ee.birth_date) AS birth_date_ts, \
             ee.first_name AS first_name, ee.last_name AS last_name, ee.gender AS gender, \

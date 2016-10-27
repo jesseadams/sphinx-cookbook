@@ -5,7 +5,7 @@ if os[:family] == 'redhat'
   data_dir = '/var/lib/sphinx'
   daemon = 'searchd'
   user = 'sphinx'
-elsif ['debian', 'ubuntu'].include?(os[:family])
+elsif %w(debian ubuntu).include?(os[:family])
   package_name = 'sphinxsearch'
   data_dir = '/var/lib/sphinxsearch/data'
   daemon = 'sphinxsearch'
@@ -14,7 +14,7 @@ end
 
 describe package(package_name) do
   it { should be_installed }
-end 
+end
 
 describe service(daemon) do
   it { should be_enabled }
@@ -23,7 +23,7 @@ end
 
 describe file(data_dir) do
   it { should be_directory }
-  it { should be_owned_by user}
+  it { should be_owned_by user }
   it { should be_mode 755 }
 end
 

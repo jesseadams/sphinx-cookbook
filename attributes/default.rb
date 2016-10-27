@@ -8,30 +8,30 @@ default[:sphinx][:use_postgres]   = false
 
 # Source Installation Settings
 default[:sphinx][:source][:retrieve_method] = 'http' # http or svn
-default[:sphinx][:source][:source_url] = "http://sphinxsearch.com/files/sphinx-2.2.4-release.tar.gz"
-default[:sphinx][:source][:url] = "http://sphinxsearch.googlecode.com/svn"
-default[:sphinx][:source][:install_path] = "/opt/sphinx"
+default[:sphinx][:source][:source_url] = 'http://sphinxsearch.com/files/sphinx-2.2.4-release.tar.gz'
+default[:sphinx][:source][:url] = 'http://sphinxsearch.googlecode.com/svn'
+default[:sphinx][:source][:install_path] = '/opt/sphinx'
 default[:sphinx][:source][:configure_flags]       = []
 default[:sphinx][:source][:extra_configure_flags] = []
 default[:sphinx][:source][:branch]                = 'trunk'
 default[:sphinx][:source][:revision]              = 'HEAD'
 
 # Package installation via RPM
-default[:sphinx][:rpm][:name]                  = "sphinx-2.2.11-1.rhel7.x86_64.rpm"
-default[:sphinx][:rpm][:base_url]              = "http://sphinxsearch.com/files/"
+default[:sphinx][:rpm][:name]                  = 'sphinx-2.2.11-1.rhel7.x86_64.rpm'
+default[:sphinx][:rpm][:base_url]              = 'http://sphinxsearch.com/files/'
 
 # Package Installation Settings
 default[:sphinx][:package][:name]     = nil # depends on platform_family when not explicit
 default[:sphinx][:package][:yum_repo] = 'yum-epel' # yum recipe or nil
 
 # Search daemon settings
-default[:sphinx][:searchd][:listen]       = ["0.0.0.0:9312"]
+default[:sphinx][:searchd][:listen]       = ['0.0.0.0:9312']
 default[:sphinx][:searchd][:read_timeout] = 5
 default[:sphinx][:searchd][:client_timeout] = 300
 default[:sphinx][:searchd][:max_children] = 0
 default[:sphinx][:searchd][:max_matches]  = 1000
 default[:sphinx][:searchd][:query_log_format] = 'plain'
-default[:sphinx][:searchd][:rt_flush_period] = 36000
+default[:sphinx][:searchd][:rt_flush_period] = 36_000
 default[:sphinx][:searchd][:seamless_rotate] = 1
 default[:sphinx][:searchd][:preopen_indexes] = 1
 default[:sphinx][:searchd][:unlink_old] = 1
@@ -52,7 +52,7 @@ default[:sphinx][:searchd][:binlog_flush] = 2
 default[:sphinx][:searchd][:binlog_max_log_size] = 0
 default[:sphinx][:searchd][:collation_server] = 'libc_ci'
 default[:sphinx][:searchd][:collation_libc_locale] = 'C'
-default[:sphinx][:searchd][:rt_flush_period] = 36000
+default[:sphinx][:searchd][:rt_flush_period] = 36_000
 default[:sphinx][:searchd][:thread_stack] = '1M'
 default[:sphinx][:searchd][:expansion_limit] = 0
 default[:sphinx][:searchd][:watchdog] = 1
@@ -94,6 +94,6 @@ else
   default[:sphinx][:data_dir] = '/var/lib/sphinx'
   default[:sphinx][:log_dir] = '/var/log/sphinx'
   default[:sphinx][:run_dir] = '/var/run/sphinx'
-  default[:sphinx][:daemon] = "searchd"
+  default[:sphinx][:daemon] = 'searchd'
   default[:sphinx][:user] = 'sphinx'
 end

@@ -3,7 +3,7 @@ require_relative '../../../kitchen/data/spec_helper.rb'
 if os[:family] == 'redhat'
   daemon = 'searchd'
   user = 'sphinx'
-elsif ['debian', 'ubuntu'].include?(os[:family])
+elsif %w(debian ubuntu).include?(os[:family])
   daemon = 'sphinxsearch'
   user = 'sphinxsearch'
 end
@@ -16,7 +16,7 @@ end
 
 describe file(data_dir) do
   it { should be_directory }
-  it { should be_owned_by user}
+  it { should be_owned_by user }
   it { should be_mode 755 }
 end
 

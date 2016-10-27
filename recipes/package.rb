@@ -6,10 +6,10 @@ elsif platform_family?('debian')
   include_recipe 'apt::default'
 end
 
-package "sphinx" do
+package 'sphinx' do
   version node[:sphinx][:version] unless node[:sphinx][:version].nil?
   action :install
   package_name node[:sphinx][:package][:name]
 end
 
-include_recipe "sphinx::_configure"
+include_recipe 'sphinx::_configure'

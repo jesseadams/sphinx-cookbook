@@ -19,4 +19,4 @@ rpm_package sphinx_rpm do
   action :install
 end
 
-include_recipe "sphinx::_configure"
+include_recipe 'sphinx::_configure'
