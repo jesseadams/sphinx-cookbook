@@ -17,7 +17,7 @@ default[:sphinx][:source][:branch]                = 'trunk'
 default[:sphinx][:source][:revision]              = 'HEAD'
 
 # Package installation via RPM
-default[:sphinx][:rpm][:name]                  = "sphinx-2.2.3-1.rhel6.x86_64.rpm"
+default[:sphinx][:rpm][:name]                  = "sphinx-2.2.11-1.rhel7.x86_64.rpm"
 default[:sphinx][:rpm][:base_url]              = "http://sphinxsearch.com/files/"
 
 # Package Installation Settings
