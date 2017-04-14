@@ -1,6 +1,6 @@
 source <%= @new_resource.name %> {
     type = <%= @new_resource.type %>
-<% @new_resource.params.each do |k, v| %>
+<% @new_resource.attrs.each do |k, v| %>
     <% if v.respond_to?("each") %>
         <% v.each do |sub_v| %>
             <%= k %> = <%= sub_v %>
